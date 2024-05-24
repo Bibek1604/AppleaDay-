@@ -83,7 +83,7 @@ function Signup() {
                 Log in
               </button>
             </div>  <Link to="/login" className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">
-    Register here
+    Register here To get loged in
   </Link>
           </form>
         </div>

@@ -1,4 +1,6 @@
-function Sinup() {
+import { Link } from "react-router-dom";
+
+function Signup() {
     return (
         <>
 <div className="font-[sans-serif] text-[#333]">
@@ -80,8 +82,9 @@ function Sinup() {
               <button type="button" className="w-full shadow-xl py-2.5 px-4 text-sm font-semibold rounded text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
                 Log in
               </button>
-            </div>
-            <p className="text-sm mt-6 text-center">Don't have an account <a href="javascript:void(0);" className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">Register here</a></p>
+            </div>  <Link to="/login" className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">
+    Register here
+  </Link>
           </form>
         </div>
       </div>
@@ -91,4 +94,4 @@ function Sinup() {
     )
 }
 
-export default Sinup
+export default Signup;

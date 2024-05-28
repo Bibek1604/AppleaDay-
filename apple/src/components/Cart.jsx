@@ -87,7 +87,7 @@ function Cart() {
       </div>
       <div className="py-10">
         <label
-              for="promo"
+              htmlFor="promo"
               className="font-semibold inline-block mb-3 text-sm uppercase"
             >
               Promo Code
@@ -110,6 +110,7 @@ function Cart() {
         <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
               Checkout
             </button>
+            
       </div>
     </div>
   </div>

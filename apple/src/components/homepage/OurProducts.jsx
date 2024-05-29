@@ -45,10 +45,10 @@ const OurProducts = () => {
           <h3 className="text-green-400 text-lg mb-2">Categories</h3>
           <h2 className="text-white text-3xl font-bold mb-4">Enhance Your Music Experience</h2>
           <div className="flex space-x-2 mb-4">
-            <div className="bg-white text-black rounded-full px-4 py-2">23 Hours</div>
-            <div className="bg-white text-black rounded-full px-4 py-2">05 Days</div>
-            <div className="bg-white text-black rounded-full px-4 py-2">59 Minutes</div>
-            <div className="bg-white text-black rounded-full px-4 py-2">35 Seconds</div>
+            <div className="bg-white text-black rounded-full px-4 py-2 bg-red-600">23 Hours</div>
+            <div className="bg-white text-black rounded-full px-4 py-2 bg-red-600">05 Days</div>
+            <div className="bg-white text-black rounded-full px-4 py-2 bg-red-600">59 Minutes</div>
+            <div className="bg-white text-black rounded-full px-4 py-2 bg-red-600">35 Seconds</div>
           </div>
           <button className="bg-green-500 text-white px-6 py-2 rounded-lg">Buy Now!</button>
         </div>

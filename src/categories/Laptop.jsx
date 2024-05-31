@@ -1,12 +1,10 @@
 import React from 'react';
 import Footer from '../components/Footer';
 import NavBar from '../components/NavBar';
-import TopBar from '../components/TopBar';
 
 const Laptop = () => {
   return (
     <div>
-        <TopBar />
         <NavBar />
     <div className="relative m-10 w-full max-w-xs overflow-hidden rounded-lg bg-white shadow-md">
       <a href="#">

@@ -1,19 +1,20 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Accessories from "./categories/Accessories";
-import Earbuds from "./categories/earbuds";
+import Earbuds from './categories/Earbuds';
+import NewAndroid from "./categories/NewAndroid";
 import Home from "./homepage";
 
-import Electronics from "../categories/Electronics"; // Correct case
-import Laptop from "../categories/Laptop";
-import NewAndroid from "../categories/NewAndroid"; // Correct case
-import NewIphone from "../categories/NewIphone";
-import UsedAndroid from "../categories/UsedAndroid";
-import UsedIphone from "../categories/UsedIphone";
-import Contact from "../components/Contact";
-import Footer from '../components/Footer';
-import Login from '../components/Login';
-import Signup from '../components/Signup';
-import './App.css';
+import Electronics from "./categories/Electronics"; // Correct case
+import Laptop from "./categories/Laptop";
+import NewIphone from "./categories/NewIphone";
+import UsedAndroid from "./categories/UsedAndroid";
+import UsedIphone from "./categories/UsedIphone";
+import About from "./components/About";
+import Cart from './components/Cart';
+import Contact from "./components/Contact";
+import Footer from './components/Footer';
+import Login from './components/Login';
+import Signup from './components/Signup';
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/footer" element={<Footer />} />
+          <Route path="/about" element={<About />} />
+
           <Route path="/contact" element={<Contact />} />
           <Route path="/accessories" element={<Accessories />} />
           <Route path="/earbuds" element={<Earbuds />} />
@@ -35,6 +38,7 @@ function App() {
           <Route path="/new-android" element={<NewAndroid />} />
           <Route path="/used-iphone" element={<UsedIphone />} />
           <Route path="/used-android" element={<UsedAndroid />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </Router>
     </>

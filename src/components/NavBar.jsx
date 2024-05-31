@@ -32,15 +32,14 @@ function NavBar() {
         </div>
       </div>
       <div className="container mx-auto py-2 px-4 flex overflow-x-auto whitespace-nowrap space-x-4 text-sm text-gray-700">
-        <Link to="/womens-fashion" className="hover:text-rose-600">New Iphone</Link>
-        <Link to="/mens-fashion" className="hover:text-rose-600">Cover</Link>
+        <Link to="/new-iphone" className="hover:text-rose-600">New Iphone</Link>
+        <Link to="/cover" className="hover:text-rose-600">Cover</Link>
         <Link to="/electronics" className="hover:text-rose-600">Electronics</Link>
-        <Link to="/home-lifestyle" className="hover:text-rose-600">New Android</Link>
-        <Link to="/medicine" className="hover:text-rose-600">Used Iphone</Link>
-        <Link to="/sports-outdoor" className="hover:text-rose-600">Used Android </Link>
-        <Link to="/babys-toys" className="hover:text-rose-600">Laptop</Link>
-        <Link to="/groceries-pets" className="hover:text-rose-600">Earbuds</Link>
-        <Link to="/health-beauty" className="hover:text-rose-600">Health & Beauty</Link>
+        <Link to="/new-android" className="hover:text-rose-600">New Android</Link>
+        <Link to="/used-iphone" className="hover:text-rose-600">Used Iphone</Link>
+        <Link to="/used-android" className="hover:text-rose-600">Used Android </Link>
+        <Link to="/laptops" className="hover:text-rose-600">Laptop</Link>
+        <Link to="/earbuds" className="hover:text-rose-600">Earbuds</Link>
       </div>
       <div className="flex-grow"></div> {/* This element will take up the remaining space */}
     </div>

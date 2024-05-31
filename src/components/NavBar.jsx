@@ -1,9 +1,12 @@
 import { Link } from 'react-router-dom';
+import TopBar from './TopBar';
 
 
 function NavBar() {
   return (
-    <div className="bg-white shadow-md h-screen flex flex-col">
+    <div>
+      <TopBar />
+    <div className="bg-white shadow-md flex flex-col h-48">
       <div className="container mx-auto py-4 px-4 flex justify-between items-center">
         <div className="flex items-center space-x-8">
           <h1 className="text-2xl font-bold">Exclusive</h1>
@@ -40,8 +43,11 @@ function NavBar() {
         <Link to="/used-android" className="hover:text-rose-600">Used Android </Link>
         <Link to="/laptops" className="hover:text-rose-600">Laptop</Link>
         <Link to="/earbuds" className="hover:text-rose-600">Earbuds</Link>
+        <Link to="/accessories" className="hover:text-rose-600">Accessories</Link>
+
       </div>
       <div className="flex-grow"></div> {/* This element will take up the remaining space */}
+    </div>
     </div>
   );
 }

@@ -14,6 +14,7 @@ import Cart from './components/Cart';
 import Contact from "./components/Contact";
 import Footer from './components/Footer';
 import Login from './components/Login';
+import ProductDetail from "./components/ProductDetail";
 import Signup from './components/Signup';
 
 function App() {
@@ -33,12 +34,14 @@ function App() {
           <Route path="/accessories" element={<Accessories />} />
           <Route path="/earbuds" element={<Earbuds />} />
           <Route path="/electronics" element={<Electronics />} />
-          <Route path="/laptop" element={<Laptop />} />
+          <Route path="/laptops" element={<Laptop />} />
           <Route path="/new-iphone" element={<NewIphone />} />
           <Route path="/new-android" element={<NewAndroid />} />
           <Route path="/used-iphone" element={<UsedIphone />} />
           <Route path="/used-android" element={<UsedAndroid />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/productdetail" element={<ProductDetail />} />
+
         </Routes>
       </Router>
     </>

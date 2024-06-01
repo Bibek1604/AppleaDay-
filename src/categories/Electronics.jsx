@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import NavBar from '../components/NavBar';
 import TopBar from '../components/TopBar';
+
 const Electronics = () => {
   return (
     <div>
@@ -29,7 +30,7 @@ const Electronics = () => {
             <span className="text-3xl font-bold text-slate-900">$249</span>
             <span className="text-sm text-slate-900 line-through">$299</span>
           </p>         
-      <Link to="/cart" 
+      <Link to="/productdetail" 
       className="flex items-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300"
     >
       <svg 

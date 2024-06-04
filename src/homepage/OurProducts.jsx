@@ -1,43 +1,23 @@
 import "@material-tailwind/react";
-import { FaEye, FaHeart } from "react-icons/fa";
-
-
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { FaEye, FaHeart } from 'react-icons/fa';
 
 const OurProducts = () => {
-  const products = [
-    {
-      id: 1,
-      name: 'Breed Dry Dog Food',
-      price: 100,
-      image: 'path/to/dog-food.jpg',
-      rating: 4.5,
-      reviews: 35
-    },
-    {
-      id: 2,
-      name: 'CANON EOS DSLR Camera',
-      price: 360,
-      image: 'path/to/canon-camera.jpg',
-      rating: 4.5,
-      reviews: 95
-    },
-    {
-      id: 3,
-      name: 'ASUS FHD Gaming Laptop',
-      price: 700,
-      image: 'path/to/asus-laptop.jpg',
-      rating: 4.5,
-      reviews: 325
-    },
-    {
-      id: 4,
-      name: 'Curology Product Set',
-      price: 500,
-      image: 'path/to/curology-product.jpg',
-      rating: 4,
-      reviews: 145
-    },
-  ];
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://127.0.0.1:8000/productapi/');
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching the products:', error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   return (
     <div className="p-8 bg-white">

@@ -93,8 +93,9 @@ const FlashSales = () => {
         </div>
 
         {/* Right Side - < > */}
-        <div className="text-red-600 text-2xl font-semibold">
-          &lt; &gt;
+        <div className="flex space-x-2">
+          <button className="p-2 bg-gray-200 rounded-full hover:bg-gray-300">{'<'}</button>
+          <button className="p-2 bg-gray-200 rounded-full hover:bg-gray-300">{'>'}</button>
         </div>
       </div>
 

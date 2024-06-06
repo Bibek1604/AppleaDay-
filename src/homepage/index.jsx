@@ -5,7 +5,7 @@ import Category from '../homepage/Category';
 import FirstCrausel from '../homepage/FirstCrausel';
 import FlashSales from '../homepage/FlashSales';
 import NewArrival from "../homepage/NewArrival";
-import OurProducts from '../homepage/OurProducts';
+import OurProducts from './OurProducts';
 import Service from '../homepage/Service';
 
 

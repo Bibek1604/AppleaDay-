@@ -42,7 +42,7 @@ const OurProducts = () => {
         <div className="h-6 w-1 bg-red-600 inline-block mr-2"></div>
         <span className="text-lg font-bold">Our Products</span>
       </div>
-      <h3 className="text-3xl font-bold mb-8">Explore Our Products</h3>
+      <h3 className="text-3xl font-bold mb-8">Explore Our Shops</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {products.map((product) => (
           <div key={product.id} className="border p-4 rounded-lg text-center">

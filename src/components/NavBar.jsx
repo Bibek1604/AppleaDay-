@@ -16,23 +16,24 @@ function NavBar() {
             <Link to="/about" className="text-gray-700 hover:text-rose-600">About</Link>
             <Link to="/signup" className="text-gray-700 hover:text-rose-600">Sign Up</Link>
           </nav>
-        </div>+
-        <div className="flex items-center space-x-4">
-          <input 
-            type="text" 
-            placeholder="What are you looking for?" 
-            className="p-3 border border-gray-300 rounded-md"
-          />
-          <button className="p-2">
-            <i className="fas fa-search text-gray-700"></i>
-          </button>
-          <button className="p-2">
-            <i className="fas fa-heart text-gray-700 space-x-15"></i>
-          </button>
-          <button className="p-2">
-            <i className="fas fa-shopping-cart text-gray-700"></i>
-          </button>
         </div>
+        <div className="flex items-center space-x-4">
+      <input 
+        type="text" 
+        placeholder="What are you looking for?" 
+        className="p-3 border border-gray-300 rounded-md"
+      />
+      <button className="p-2 bg-blue-500 text-white rounded-md">
+        Search
+      </button>
+      <button className="p-2 flex items-center space-x-2 bg-green-500 text-white rounded-md">
+        <i className="fas fa-shopping-cart"></i>
+        <Link to="/cart" className="text-white">Add to Cart</Link>
+        <span className="text-red-500">❤️</span>
+      </button>
+    </div>
+
+
       </div>
       <div className="container mx-auto py-2 px-4 flex overflow-x-auto whitespace-nowrap space-x-4 text-sm text-gray-700">
         <Link to="/new-iphone" className="hover:text-rose-600">New Iphone</Link>

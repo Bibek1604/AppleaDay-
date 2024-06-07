@@ -17,6 +17,8 @@ const Laptop = () => {
       dispatch(fetchProducts());
     }
   }, [productStatus, dispatch]);
+  const filteredProducts = products.filter(product => product.category === 'Laptop');
+
 
   if (productStatus === 'loading') {
     return <div>Loading...</div>;
@@ -30,7 +32,7 @@ const Laptop = () => {
     <NavBar />
     <main className="container mx-auto p-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20">
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
           <div key={product.id} className="relative max-w-xs mx-auto overflow-hidden rounded-lg bg-white shadow-md">
             <Link to={`/productdetail/${product.id}`}>
               <img className="h-60 w-full rounded-t-lg object-cover" src={product.image} alt={product.title} />

@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ discount, image, title, originalPrice, discountedPrice, rating, reviews }) => {
   return (
@@ -55,7 +55,7 @@ const FlashSales = () => {
 
   return (
     <div className="flex flex-col items-center py-8">
-      <div className="flex items-start justify-center w-full gap-12 mt-9 place-content-evenly">
+      <div className="flex items-start justify-center w-full gap-12 mt-11 place-content-evenly">
         {/* Left Side - Flash Sales */}
         <div className="text-red-600 text-2xl font-semibold">
           Flash Sales
@@ -104,7 +104,7 @@ const FlashSales = () => {
           <ProductCard key={index} {...product} />
         ))}
       </div>
-      <button className="mt-8 bg-red-500 text-white px-6 py-3 rounded hover:bg-red-600">View All Products</button>
+      <Link to='/Flashsaleshop' className="mt-8 bg-red-500 text-white px-6 py-3 rounded hover:bg-red-600">View All Products</Link>
 
      </div>
   );

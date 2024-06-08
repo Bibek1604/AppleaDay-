@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import TopBar from './TopBar';
-
+import { useSelector } from 'react-redux';
 
 function NavBar() {
+
+  const cartItems = useSelector((store)=>store.cart.cartItems)
   return (
     <div>
       <TopBar />
@@ -28,7 +30,7 @@ function NavBar() {
       </button>
       <button className="p-2 flex items-center space-x-2 bg-green-500 text-white rounded-md">
         <i className="fas fa-shopping-cart"></i>
-        <Link to="/cart" className="text-white">Add to Cart</Link>
+        <Link to="/cart" className="text-white">Cart-({cartItems.length}items)</Link>
         <span className="text-red-500">❤️</span>
       </button>
     </div>

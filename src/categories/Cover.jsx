@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import BestSelling from '../homepage/BestSelling';
 import Footer from '../components/Footer';
 import NavBar from '../components/NavBar';
 import TopBar from '../components/TopBar';
@@ -73,6 +74,7 @@ const Cover = () => {
           ))}
         </div>
       </main>
+      <BestSelling />
       <Footer />
     </div>
   );

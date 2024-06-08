@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import NavBar from './NavBar';
 import Footer from './Footer';
 import { Link } from 'react-router-dom';
-import { updateQuantity, removeFromCart } from '../slice/cartSlice';
+import { updateQuantity, removeFromCart, updateCart } from '../slice/cartSlice';
 import { validateCoupon } from '../slice/couponsSlice';
 
 const Cart = () => {
@@ -15,6 +15,21 @@ const Cart = () => {
 
   const [promoCode, setPromoCode] = useState('');
 
+  const updateCartFromStorage = (cartData) => {
+    dispatch(updateCart(cartData));
+  };
+
+  useEffect(() => {
+    const storedCart = localStorage.getItem('cart');
+    if (storedCart) {
+      updateCartFromStorage(JSON.parse(storedCart));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+  }, [cartItems]);
+
   const handleQuantityChange = (id, newQuantity) => {
     if (newQuantity > 0) {
       dispatch(updateQuantity({ id, quantity: newQuantity }));
@@ -25,10 +40,10 @@ const Cart = () => {
     dispatch(removeFromCart(id));
   };
 
-  const getTotalCost = () => {
+  const calculateTotalCost = () => {
     return cartItems.reduce((total, item) => {
-      const itemPrice = typeof item.price === 'number' ? item.price : 0;
-      const itemQuantity = typeof item.quantity === 'number' ? item.quantity : 0;
+      const itemPrice = parseFloat(item.final_rate) || 0;
+      const itemQuantity = parseInt(item.quantity) || 0;
       return total + itemPrice * itemQuantity;
     }, 0);
   };
@@ -37,8 +52,8 @@ const Cart = () => {
     dispatch(validateCoupon(promoCode));
   };
 
-  const totalCostBeforeDiscount = getTotalCost();
-  const totalCostAfterDiscount = totalCostBeforeDiscount - discount;
+  const totalCostBeforeDiscount = calculateTotalCost();
+  const totalCostAfterDiscount = totalCostBeforeDiscount - (discount || 0);
 
   return (
     <div>
@@ -85,7 +100,9 @@ const Cart = () => {
                         Remove
                       </p>
                     </div>
-                    <p className="text-base font-black leading-none text-gray-800">Rs{product.final_rate * product.quantity}</p>
+                    <p className="text font-black leading-none text-gray-800">
+                      Rs{(parseFloat(product.final_rate) * parseInt(product.quantity)).toFixed(2)}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -103,12 +120,12 @@ const Cart = () => {
             <h1 className="font-semibold text-2xl border-b pb-8">Order Summary</h1>
             <div className="flex justify-between mt-10 mb-5">
               <span className="font-semibold text-sm uppercase">Items {cartItems.length}</span>
-              <span className="font-semibold text-sm">Rs{(totalCostBeforeDiscount - discount).toFixed(2)}</span>
+              <span className="font-semibold text-sm">Rs{totalCostBeforeDiscount.toFixed(2)}</span>
             </div>
             <div>
               <label className="font-medium inline-block mb-3 text-sm uppercase">Shipping</label>
               <select className="block p-2 text-gray-600 w-full text-sm">
-                <option> Free Delivery All Over Nepal - </option>
+                <option>Free Delivery All Over Nepal</option>
               </select>
             </div>
             <div className="py-10">
@@ -127,27 +144,32 @@ const Cart = () => {
               className="bg-red-500 hover:bg-red-600 px-5 py-2 text-sm text-white uppercase"
               onClick={handleApplyPromo}
               disabled={couponStatus === 'loading'}
-              >
-                {couponStatus === 'loading' ? 'Applying...' : 'Apply'}
-              </button>
-              <div className="border-t mt-8">
-                <div className="flex font-semibold justify-between py-6 text-sm uppercase">
-                  <span>Total Cost of Products Before Coupon Code</span>
-                  <span>Rs{discount.toFixed(2)}</span>
-                </div>
-
-                <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
-                  Checkout
-                </button>
+            >
+              {couponStatus === 'loading' ? 'Applying...' : 'Apply'}
+            </button>
+            <div className="border-t mt-8">
+              <div className="flex font-semibold justify-between py-6 text-sm uppercase">
+                <span>Total Cost of Products</span>
+                <span>Rs {totalCostBeforeDiscount.toFixed(2)}</span>
               </div>
+              <div className="flex font-semibold justify-between py-6 text-sm uppercase">
+                <span>Discount of Coupon Code</span>
+                <span>Rs {(discount || 0).toFixed(2)}</span>
+              </div>
+              <div className="flex font-semibold justify-between py-6 text-sm uppercase">
+                <span>Total Cost of Products After Discount</span>
+                <span>Rs {totalCostAfterDiscount.toFixed(2)}</span>
+              </div>
+              <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
+                Checkout
+              </button>
             </div>
           </div>
         </div>
-        <Footer />
       </div>
-    );
-  };
-  
-  export default Cart;
-  
-             
+      <Footer />
+    </div>
+  );
+};
+
+export default Cart;

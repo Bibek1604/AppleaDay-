@@ -7,6 +7,7 @@ import FlashSales from '../homepage/FlashSales';
 import NewArrival from "../homepage/NewArrival";
 import OurProducts from './OurProducts';
 import Service from '../homepage/Service';
+import FlashProduct from './FlashProduct';
 
 
 function Home() {
@@ -15,6 +16,7 @@ function Home() {
             <NavBar />
             <FirstCrausel />
             <FlashSales />
+            <FlashProduct />
             <Category />
             <BestSelling />
             <OurProducts />

@@ -9,7 +9,6 @@ import Laptop from "./categories/Laptop";
 import NewIphone from "./categories/NewIphone";
 import UsedAndroid from "./categories/UsedAndroid";
 import UsedIphone from "./categories/UsedIphone";
-import About from "./components/About";
 import Cart from './components/Cart';
 import Contact from "./components/Contact";
 import Footer from './components/Footer';
@@ -18,7 +17,8 @@ import ProductDetail from "./components/ProductDetail";
 import Signup from './components/Signup';
 import Cover from "./categories/Cover";
 import Flashsaleshop from "./Shop/Flashsaleshop";
-
+import FlashSaleDetails from "./Shop/flashSaleDetails";
+import About from "./components/About";
 export {
     Accessories,
     store,
@@ -30,15 +30,16 @@ export {
     NewIphone,
     UsedAndroid,
     UsedIphone,
-    About,
     Cart,
     Contact,
     Footer,
     Login,
     ProductDetail,
     Signup,
+    About,
     Cover,
     Flashsaleshop,
+    FlashSaleDetails,
     Route,
     Router,
     Routes

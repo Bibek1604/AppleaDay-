@@ -8,7 +8,8 @@ import NewArrival from "../homepage/NewArrival";
 import OurProducts from './OurProducts';
 import Service from '../homepage/Service';
 import FlashProduct from './FlashProduct';
-
+import Flashsaleshop from '../Shop/Flashsaleshop';
+import About from '../components/About';
 
 function Home() {
     return (
@@ -21,10 +22,10 @@ function Home() {
             <BestSelling />
             <OurProducts />
             <NewArrival />
+            <Flashsaleshop />
             <Service />
-
-
-        <Footer />
+            <About />
+            <Footer />
         </>
     );
 }

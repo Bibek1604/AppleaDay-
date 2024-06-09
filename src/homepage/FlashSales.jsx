@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+
 const FlashSales = () => {  
   return (
     <div className="flex flex-col items-center py-8">

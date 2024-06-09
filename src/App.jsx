@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Accessories, Earbuds, Electronics, Laptop, NewIphone, UsedAndroid, UsedIphone, About, Cart, Contact, Footer, Login, ProductDetail, Signup, Cover, Home, NewAndroid, Flashsaleshop } from './index'; // Correct case 
+import { Accessories, Earbuds, Electronics, Laptop, NewIphone, UsedAndroid, UsedIphone, About, Cart, Contact, Footer, Login, ProductDetail, Signup, Cover, Home, NewAndroid, Flashsaleshop,FlashSaleDetails } from './index'; // Correct case 
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store/Store';
@@ -9,6 +9,7 @@ function App() {
     <Provider store={store}>
       <Router>
         <Routes>
+          
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
@@ -27,6 +28,12 @@ function App() {
           <Route path="/cover" element={<Cover />} />
           <Route path="/productdetail/:id" element={<ProductDetail />} />
           <Route path='/flashsaleshop' element={<Flashsaleshop />} />
+          <Route path='/flashSaleDetails/:productId' element={<FlashSaleDetails />} />
+
+ 
+          
+          
+
         </Routes>
       </Router>
     </Provider>

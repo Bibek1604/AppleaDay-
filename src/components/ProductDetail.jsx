@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchProducts } from '../slice/productsSlice'; // Import your fetchProducts thunk
+import { fetchProducts } from '../slice/productsSlice'; 
 import { addItem } from '../slice/cartSlice';
 import NavBar from './NavBar';
 import Footer from './Footer';
 
 const ProductDetail = () => {
-  const { id } = useParams(); // Get the product ID from URL parameters
+  const { id } = useParams(); 
   const dispatch = useDispatch();
-  const [quantity, setQuantity] = useState(1); // State for quantity
+  const [quantity, setQuantity] = useState(1);
 
-  // Fetch products from Redux store
   const product = useSelector((state) =>
     state.products.items.find((product) => product.id === Number(id))
   );
 
-  // Fetch products from the API if they are not in the store
   useEffect(() => {
     if (!product) {
       dispatch(fetchProducts());
@@ -45,11 +43,11 @@ const ProductDetail = () => {
         <div className="flex flex-col lg:flex-row bg-white shadow-md p-6">
           <div className="flex-1">
             <img
-              src={product.image}
+              src={product.photo}
               alt={product.title}
               className="w-full max-w-sm mx-auto"
             />
-            <div className="flex justify-center mt-4">
+            {/* <div className="flex justify-center mt-4">
               <img
                 src={product.thumbnail1}
                 alt="Thumbnail 1"
@@ -65,7 +63,7 @@ const ProductDetail = () => {
                 alt="Thumbnail 3"
                 className="w-16 h-16 mx-1 cursor-pointer"
               />
-            </div>
+            </div> */}
           </div>
           <div className="flex-1 lg:pl-10">
             <h1 className="text-3xl font-bold mb-2 text-red-500">{product.title}</h1>
@@ -76,16 +74,7 @@ const ProductDetail = () => {
               {product.description}
             </p>
             <div className="flex items-center mb-4">
-              <div className="flex items-center border border-gray-300 mr-4">
-                <button className="px-3 py-1" onClick={() => handleQuantityChange(quantity - 1)}>-</button>
-                <input
-                  type="text"
-                  value={quantity}
-                  readOnly
-                  className="w-12 text-center border-l border-r border-gray-300"
-                />
-                <button className="px-3 py-1" onClick={() => handleQuantityChange(quantity + 1)}>+</button>
-              </div>
+
               <div className="text-3xl font-bold text-gray-900">
                 {product.final_rate}
                 <span className="block text-sm text-gray-500">+12% VAT Added</span>

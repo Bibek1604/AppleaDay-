@@ -1,5 +1,6 @@
 import { FaEye, FaHeart } from "react-icons/fa";
-
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 const BestSelling = () => {
   const products = [
     {
@@ -50,7 +51,7 @@ const BestSelling = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {products.map((product) => (
           <div key={product.id} className="border p-4 rounded-lg text-center">
-            <img src={product.image} alt={product.name} className="mb-4 w-full h-40 object-cover" />
+            <img src={product.photo} alt={product.name} className="mb-4 w-full h-40 object-cover" />
             <h4 className="text-lg font-bold mb-2">{product.name}</h4>
             <div className="mb-2">
               <span className="text-red-600 text-xl font-bold">${product.price}</span>
@@ -62,12 +63,15 @@ const BestSelling = () => {
               {Array.from({ length: 5 }).map((_, index) => (
                 <span key={index} className={`text-yellow-500 ${index < product.rating ? 'fa fa-star' : 'fa fa-star-o'}`}></span>
               ))}
-              <span className="ml-2">({product.reviews})</span>
             </div>
-            <div className="flex justify-center space-x-4">
-              <FaHeart className="text-gray-500 cursor-pointer" />
-              <FaEye className="text-gray-500 cursor-pointer" />
-            </div>
+            <div className="flex justify-between">
+              <button className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600" >
+                Add to Cart
+              </button>
+             <button className="bg-gray-200 text-gray-800 py-1 px-3 rounded hover:bg-gray-300">
+                Details
+                </button>
+                </div>
           </div>
         ))}
       </div>

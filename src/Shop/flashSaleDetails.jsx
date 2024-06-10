@@ -3,9 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchFlashSales } from '../slice/FlashsaleSlice';
 import { addItem } from '../slice/cartSlice';
-import NavBar from '../components/NavBar';
-import Footer from '../components/Footer';
-
+import NavBar from './NavBar';
+import Footer from './Footer';
 const FlashSaleDetails = () => {
   const { productId } = useParams();  // Get the productId from route parameters
   const [quantity, setQuantity] = useState(1);
@@ -49,6 +48,11 @@ const FlashSaleDetails = () => {
   if (!product) {
     return <div>Product not found</div>;
   }
+  const handleQuantityChange = (newQuantity) => {
+    if (newQuantity > 0) {
+      setQuantity(newQuantity);
+    }
+  };
 
   return (
     <>
@@ -56,27 +60,11 @@ const FlashSaleDetails = () => {
       <div className="flex flex-col lg:flex-row bg-white shadow-md p-6">
         <div className="flex-1">
           <img
-            src={product.image}
+            src={product.photo}
             alt={product.title}
             className="w-full max-w-sm mx-auto"
           />
-          <div className="flex justify-center mt-4">
-            <img
-              src={product.thumbnail1}
-              alt="Thumbnail 1"
-              className="w-16 h-16 mx-1 cursor-pointer"
-            />
-            <img
-              src={product.thumbnail2}
-              alt="Thumbnail 2"
-              className="w-16 h-16 mx-1 cursor-pointer"
-            />
-            <img
-              src={product.thumbnail3}
-              alt="Thumbnail 3"
-              className="w-16 h-16 mx-1 cursor-pointer"
-            />
-          </div>
+
         </div>
         <div className="flex-1 lg:pl-10">
           <h1 className="text-3xl font-bold mb-2 text-red-500">{product.title}</h1>
@@ -87,29 +75,22 @@ const FlashSaleDetails = () => {
             {product.description}
           </p>
           <div className="flex items-center mb-4">
-            <div className="flex items-center border border-gray-300 mr-4">
-              <button className="px-3 py-1" onClick={() => handleQuantityChange(quantity - 1)}>-</button>
-              <input
-                type="text"
-                value={quantity}
-                readOnly
-                className="w-12 text-center border-l border-r border-gray-300"
-              />
-              <button className="px-3 py-1" onClick={() => handleQuantityChange(quantity + 1)}>+</button>
-            </div>
+
             <div className="text-3xl font-bold text-gray-900">
               {product.final_rate}
               <span className="block text-sm text-gray-500">+12% VAT Added</span>
             </div>
           </div>
           <button className="bg-blue-500 text-white py-2 px-4 w-full mb-4" onClick={handleAddItem}>
-            Add to Cart
-          </button>
+              Add to Cart
+            </button>
           <div className="mb-4">
             <h2 className="mt-4 text-xl font-semibold mb-2">Product Details</h2>
             <p><strong>Category:</strong> {product.category}</p>
             <p><strong>Color:</strong> {product.color}</p>
             <p><strong>Storage:</strong> {product.storage}</p>
+            <p><strong>warranty:</strong> {product.warranty}</p>
+
           </div>
           <div className="mb-4">
             <h3 className="text-lg font-medium mb-2">Select Size</h3>

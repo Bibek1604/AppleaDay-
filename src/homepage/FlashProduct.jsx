@@ -38,7 +38,9 @@ const FlashProduct = () => {
               <span className="text-gray-500 line-through ml-1">${flashSale.final_rate}</span>
             </div>
             <div className="flex justify-between">
-              <button className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600">Add to Cart</button>
+            <button className="bg-blue-500 text-white py-2 px-4 w-full mb-4" onClick={handleAddItem}>
+              Add to Cart
+            </button>
               <button className="bg-gray-200 text-gray-800 py-1 px-3 rounded hover:bg-gray-300">Details</button>
             </div>
           </div>

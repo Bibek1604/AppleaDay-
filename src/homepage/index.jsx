@@ -22,9 +22,7 @@ function Home() {
             <BestSelling />
             <OurProducts />
             <NewArrival />
-            <Flashsaleshop />
             <Service />
-            <About />
             <Footer />
         </>
     );

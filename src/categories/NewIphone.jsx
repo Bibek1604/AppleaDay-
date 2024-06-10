@@ -32,7 +32,7 @@ const NewIphone = () => {
           {filteredProducts.map((product) => (
             <div key={product.id} className="relative max-w-xs mx-auto overflow-hidden rounded-lg bg-white shadow-md">
               <Link to={`/productdetail/${product.id}`}>
-                <img className="h-60 w-full rounded-t-lg object-cover" src={product.image} alt={product.title} />
+                <img className="h-60 w-full rounded-t-lg object-cover" src={product.photo} alt={product.title} />
               </Link>
               <span className="absolute top-0 left-0 w-28 transform translate-y-4 -translate-x-6 -rotate-45 bg-black text-center text-sm text-white">Sale</span>
               <div className="mt-4 px-5 pb-5">

@@ -19,6 +19,8 @@ import Cover from "./categories/Cover";
 import Flashsaleshop from "./Shop/Flashsaleshop";
 import FlashSaleDetails from "./Shop/flashSaleDetails";
 import About from "./components/About";
+import Bestsellingshop from "./Shop/bestsellingshop";
+import Bestsellingshopdetails from './Shop/bestsellingshopdetails';
 export {
     Accessories,
     store,
@@ -40,6 +42,8 @@ export {
     Cover,
     Flashsaleshop,
     FlashSaleDetails,
+    Bestsellingshop,
+    Bestsellingshopdetails,
     Route,
     Router,
     Routes

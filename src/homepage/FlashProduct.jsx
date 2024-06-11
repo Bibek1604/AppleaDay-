@@ -33,15 +33,15 @@ const FlashProduct = () => {
         {flashSales.slice(0, 4).map((flashSale) => (
           <div key={flashSale.id} className="border rounded-lg p-3 shadow-lg w-72 mx-auto">
             <div className="relative">
-              <img src={flashSale.photo} alt={flashSale.title} className="w-full h-40 object-cover mb-4 rounded-lg" />
+              <img src={flashSale.Photo} alt={flashSale.title} className="w-full h-40 object-cover mb-4 rounded-lg" />
               <span className="absolute top-2 left-0 bg-red-500 text-white text-xs px-2 py-1 rounded-r">
                 -{flashSale.discount_percent}%
               </span>
             </div>
             <h3 className="text-lg font-semibold mb-2">{flashSale.title}</h3>
             <div className="flex items-center mb-2">
-              <span className="text-red-500 ml-1 font-bold">${flashSale.initial_rate}</span>
-              <span className="text-gray-500 line-through ml-1">${flashSale.final_rate}</span>
+              <span className="text-red-500 ml-1 font-bold">Rs.{flashSale.initial_rate}</span>
+              <span className="text-gray-500 line-through ml-1">Rs.{flashSale.final_rate}</span>
             </div>
             <div className="flex justify-between">
               <button className="bg-blue-500 text-white py-1 px-3 rounded hover:bg-blue-600" onClick={() => handleAddItem(flashSale)}>

@@ -3,6 +3,8 @@ import productsReducer from '../slice/productsSlice';
 import cartReducer from '../slice/cartSlice'; 
 import couponsReducer from '../slice/couponsSlice';
 import flashSaleReducer from '../slice/FlashsaleSlice';
+import bestsaleReducer from '../slice/bestsaleSlice';
+
 
 const store = configureStore({
   reducer: {
@@ -10,6 +12,7 @@ const store = configureStore({
     cart: cartReducer,
     coupons: couponsReducer,
     flashSales: flashSaleReducer,
+    bestsale: bestsaleReducer
 
   },
 });

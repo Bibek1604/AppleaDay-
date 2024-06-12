@@ -21,6 +21,7 @@ import FlashSaleDetails from "./Shop/flashSaleDetails";
 import About from "./components/About";
 import Bestsellingshop from "./Shop/bestsellingshop";
 import Bestsellingshopdetails from './Shop/bestsellingshopdetails';
+import Billing from "./Shop/Billing";
 export {
     Accessories,
     store,
@@ -33,6 +34,7 @@ export {
     UsedAndroid,
     UsedIphone,
     Cart,
+    Billing,
     Contact,
     Footer,
     Login,

@@ -1,71 +1,57 @@
-import "@material-tailwind/react";
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { FaEye, FaHeart } from 'react-icons/fa';
+import React from 'react';
 
-const OurProducts = () => {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get('http://127.0.0.1:8000/productapi/');
-        setProducts(response.data);
-      } catch (error) {
-        console.error('Error fetching the products:', error);
-      }
-    };
-
-    fetchProducts();
-  }, []);
-
+const OurProduct = () => {
   return (
-    <div className="p-8 bg-white">
-      {/* Banner Section */}
-      <div className="relative mb-12">
-        <img src="path/to/banner-image.jpg" alt="Enhance Your Music Experience" className="w-full h-64 object-cover rounded-lg" />
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 rounded-lg">
-          <h3 className="text-green-400 text-lg mb-2">Categories</h3>
-          <h2 className="text-white text-3xl font-bold mb-4">Enhance Your Music Experience</h2>
-          <div className="flex space-x-2 mb-4">
-            <div className="bg-white text-black rounded-full px-4 py-2 bg-red-600">23 Hours</div>
-            <div className="bg-white text-black rounded-full px-4 py-2 bg-red-600">05 Days</div>
-            <div className="bg-white text-black rounded-full px-4 py-2 bg-red-600">59 Minutes</div>
-            <div className="bg-white text-black rounded-full px-4 py-2 bg-red-600">35 Seconds</div>
+    <div className="container mx-auto p-4">
+      <div className="text-left mb-8">
+        <span className="text-red-500 font-bold">Featured</span>
+        <h1 className="text-3xl font-bold">Our Shop</h1>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="relative bg-black h-72">
+          <img src="https://t4.ftcdn.net/jpg/04/17/80/01/360_F_417800157_T0LAZqY9fNsNtfv01zJvXJi452MqnFZ6.jpg" alt="Mobile repair" className="w-full h-full object-cover opacity-80" />
+          <div className="absolute bottom-4 left-4 text-white">
+            <h2 className="text-lg font-bold">Reparing Mobile Phone </h2>
+            <p>Comprehensive repairs for all smartphone brands including screen, battery, and software issues.
+            </p>
           </div>
-          <button className="bg-green-500 text-white px-6 py-2 rounded-lg">Buy Now!</button>
         </div>
-      </div>
+        <div className="grid grid-rows-2 gap-4">
+          <div className="relative bg-black h-36">
+            <img src="https://cdn0-production-images-kly.akamaized.net/f_GNAfG5XLBywhkvhWOHD4DmjMQ=/800x450/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/4239901/original/028466500_1669386239-shutterstock_1863024973.jpg" alt="Second hand mobile" class="w-10 h-1 min-w-100 min-h-50 object-cover opacity-80" />
+            <div className="absolute bottom-4 left-4 text-white">
+              <h2 className="text-base font-bold">Certified Pre-owned Mobile
+              </h2>
+              <p className="text-sm">High-quality certified pre-owned iPhones and Android devices. Fully tested, refurbished, and guaranteed for performance and reliability."
 
-      {/* Products Section */}
-      <div className="mb-8">
-        <div className="h-6 w-1 bg-red-600 inline-block mr-2"></div>
-        <span className="text-lg font-bold">Our Products</span>
-      </div>
-      <h3 className="text-3xl font-bold mb-8">Explore Our Shops</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {products.map((product) => (
-          <div key={product.id} className="border p-4 rounded-lg text-center">
-            <img src={product.image} alt={product.name} className="mb-4 w-full h-40 object-cover" />
-            <h4 className="text-lg font-bold mb-2">{product.name}</h4>
-            <div className="mb-2">
-              <span className="text-red-600 text-xl font-bold">${product.price}</span>
-            </div>
-            <div className="flex justify-center items-center mb-2">
-              {Array.from({ length: 5 }).map((_, index) => (
-                <span key={index} className={`text-yellow-500 ${index < Math.floor(product.rating) ? 'fa fa-star' : 'fa fa-star-o'}`}></span>
-              ))}
-              <span className="ml-2">({product.reviews})</span>
-            </div>
-            <div className="flex justify-center space-x-4">
-              <FaHeart className="text-gray-500 cursor-pointer" />
-              <FaEye className="text-gray-500 cursor-pointer" />
+
+
+
+
+
+</p>
             </div>
           </div>
-        ))}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="relative bg-black h-36">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJikKTTKTBppkz_8FEJaAxyo-Zy2BDBmxRZXPwLCvSY8j2okJln8qtFmuOYQw-fE3R5-8&usqp=CAU" alt="Perfume" className="w-full h-full object-cover opacity-80" />
+              <div className="absolute bottom-4 left-4 text-white">
+                <h2 className="text-base font-bold">Sell Second Hand Mobiles</h2>
+                <p className="text-sm"> We buy your pre-owned mobiles , Easy Transactions!!</p>
+              </div>
+            </div>
+            <div className="relative bg-black h-36">
+              <img src="https://img.freepik.com/premium-vector/rating-stars-trusted-seller-badge-logo-stamp-label-circular-round-design-template_542325-44.jpg" alt="Speakers" className="w-full h-full object-cover opacity-80" />
+              <div className="absolute bottom-4 left-4 text-white">
+                <h2 className="text-base font-bold">Trusted Brand</h2>
+                <p className="text-sm">Trusted by thousands</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-export default OurProducts;
+export default OurProduct;

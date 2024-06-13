@@ -5,14 +5,15 @@ import couponsReducer from '../slice/couponsSlice';
 import flashSaleReducer from '../slice/FlashsaleSlice';
 import bestsaleReducer from '../slice/bestsaleSlice';
 
-
 const store = configureStore({
   reducer: {
     products: productsReducer,
     cart: cartReducer,
     coupons: couponsReducer,
     flashSales: flashSaleReducer,
-    bestsale: bestsaleReducer
+    
+    bestsale: bestsaleReducer,
+
 
   },
 });

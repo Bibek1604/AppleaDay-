@@ -30,7 +30,7 @@ const Bestsellingshop = () => {
         {bestsale.map((product) => (
           <div key={product.id} className="relative m-10 w-full max-w-xs overflow-hidden rounded-lg bg-white shadow-md">
             <Link to={`/productdetail/${product.id}`}>
-              <img className="h-60 rounded-t-lg object-cover" src={product.photo} alt={product.title} />
+              <img className="h-60 rounded-t-lg object-cover" src={product.pic} alt={product.title} />
             </Link>
             <span className="absolute top-0 left-0 w-28 translate-y-4 -translate-x-6 -rotate-45 bg-red-600 text-center text-sm text-white">{product.discount_percentage}% OFF</span>
             <div className="mt-4 px-5 pb-5">

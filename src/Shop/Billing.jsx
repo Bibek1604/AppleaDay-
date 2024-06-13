@@ -1,11 +1,15 @@
 import React from 'react'
+import NavBar from '../components/NavBar'
+import Footer from '../components/Footer'
 function Billing() {
 
   return (
 <>
+<div>
+  <NavBar />
 <div className="font-sans bg-gray-100">
       <div className="flex max-sm:flex-col gap-4 h-full">
-        <div className="bg-gradient-to-r from-gray-800 via-gray-700 to-gray-800 sm:h-screen sm:sticky sm:top-0 lg:min-w-[350px] sm:min-w-[300px]">
+        <div className="bg-gray-500 sm:h-screen sm:sticky sm:top-0 lg:min-w-[350px] sm:min-w-[300px]">
           <div className="relative h-full">
             <div className="p-4 sm:overflow-auto sm:h-[calc(100vh-60px)]">
               <div className="space-y-4">
@@ -28,7 +32,7 @@ function Billing() {
               </div>
             </div>
 
-            <div className="md:absolute md:left-0 md:bottom-0 bg-gray-800 w-full p-4">
+            <div className="md:absolute md:left-0 md:bottom-0 bg-blue-300 w-full p-4">
               <h4 className="flex flex-wrap gap-4 text-base text-white">Total <span className="ml-auto">$84.00</span></h4>
             </div>
           </div>
@@ -112,12 +116,33 @@ function Billing() {
 
               <div className="flex gap-4 max-md:flex-col mt-8">
                 <button type="button" className="rounded-md px-4 py-3 w-full text-sm font-semibold bg-transparent hover:bg-gray-100 border-2 text-gray-800 max-md:order-1">Cancel</button>
-                <button type="button" className="rounded-md px-4 py-3 w-full text-sm font-semibold bg-gray-800 text-white hover:bg-gray-900">Complete Purchase</button>
+                <button type="button" className="rounded-md px-4 py-3 w-full text-sm font-semibold bg-red-800 text-white hover:bg-gray-900">Complete Purchase</button>
+              </div>
+            </div>
+            
+            <div className="mt-8">
+              <h3 className="text-base font-semibold text-gray-800 mb-4">Pay With</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <input type="text" placeholder="Address Line"
+                  className="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border-b focus:border-gray-800 outline-none" />
+                <input type="text" placeholder="City"
+                  className="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border-b focus:border-gray-800 outline-none" />
+                <input type="text" placeholder="State"
+                  className="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border-b focus:border-gray-800 outline-none" />
+                <input type="text" placeholder="Zip Code"
+                  className="px-4 py-3.5 bg-white text-gray-800 w-full text-sm border-b focus:border-gray-800 outline-none" />
+              </div>
+
+              <div className="flex gap-4 max-md:flex-col mt-8">
+                <button type="button" className="rounded-md px-4 py-3 w-full text-sm font-semibold bg-transparent hover:bg-gray-100 border-2 text-gray-800 max-md:order-1">Cancel</button>
+                <button type="button" className="rounded-md px-4 py-3 w-full text-sm font-semibold bg-red-800 text-white hover:bg-gray-900">Complete Purchase</button>
               </div>
             </div>
           </form>
         </div>
       </div>
+    </div>
+    <Footer />
     </div>
 </> 
  )

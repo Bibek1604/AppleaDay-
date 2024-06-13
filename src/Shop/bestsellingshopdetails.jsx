@@ -26,7 +26,7 @@ const Bestsellingshopdetails = () => {
       <div className="flex flex-col lg:flex-row bg-white shadow-md p-6">
         <div className="flex-1">
           <img
-            src={product.photo}
+            src={product.pic}
             alt={product.title}
             className="w-full max-w-sm mx-auto"
           />

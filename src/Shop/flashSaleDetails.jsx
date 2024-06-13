@@ -5,6 +5,8 @@ import { fetchFlashSales } from '../slice/FlashsaleSlice';
 import { addItem } from '../slice/cartSlice';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
+import FlashProduct from '../homepage/FlashProduct';
+
 
 const FlashSaleDetails = () => {
   const { productId } = useParams();  // Get the productId from route parameters
@@ -42,6 +44,8 @@ const FlashSaleDetails = () => {
   }
 
   if (!product) {
+    console.log('Product not found:', productId);
+
     return <div>Product not found</div>;
   }
 
@@ -51,7 +55,8 @@ const FlashSaleDetails = () => {
       <div className="flex flex-col lg:flex-row bg-white shadow-md p-6">
         <div className="flex-1">
           <img
-            src={product.photo}
+            src={product.pic}
+            
             alt={product.title}
             className="w-full max-w-sm mx-auto"
           />

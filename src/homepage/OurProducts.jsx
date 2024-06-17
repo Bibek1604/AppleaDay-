@@ -18,7 +18,7 @@ const OurProduct = () => {
         </div>
         <div className="grid grid-rows-2 gap-4">
           <div className="relative bg-black h-36">
-            <img src="https://cdn0-production-images-kly.akamaized.net/f_GNAfG5XLBywhkvhWOHD4DmjMQ=/800x450/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/4239901/original/028466500_1669386239-shutterstock_1863024973.jpg" alt="Second hand mobile" class="w-10 h-1 min-w-100 min-h-50 object-cover opacity-80" />
+            <img src="https://cdn0-production-images-kly.akamaized.net/f_GNAfG5XLBywhkvhWOHD4DmjMQ=/800x450/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/4239901/original/028466500_1669386239-shutterstock_1863024973.jpg" alt="Second hand mobile" className="w-10 h-1 min-w-100 min-h-50 object-cover opacity-80" />
             <div className="absolute bottom-4 left-4 text-white">
               <h2 className="text-base font-bold">Certified Pre-owned Mobile
               </h2>

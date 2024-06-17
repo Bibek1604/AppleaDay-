@@ -4,6 +4,7 @@ import cartReducer from '../slice/cartSlice';
 import couponsReducer from '../slice/couponsSlice';
 import flashSaleReducer from '../slice/FlashsaleSlice';
 import bestsaleReducer from '../slice/bestsaleSlice';
+import orderReducer from '../slice/orderSlice';
 
 const store = configureStore({
   reducer: {
@@ -11,8 +12,9 @@ const store = configureStore({
     cart: cartReducer,
     coupons: couponsReducer,
     flashSales: flashSaleReducer,
-    
+
     bestsale: bestsaleReducer,
+    order: orderReducer,
 
 
   },

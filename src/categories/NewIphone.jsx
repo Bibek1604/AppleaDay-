@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import NavBar from '../components/NavBar';
-import TopBar from '../components/TopBar';
 import { fetchProducts } from '../slice/productsSlice';
 
 const NewIphone = () => {
@@ -19,76 +18,35 @@ const NewIphone = () => {
   }, [productStatus, dispatch]);
 
   if (productStatus === 'loading') {
-    return <div><section class="bg-white dark:bg-gray-900">
-    <div className="container px-6 py-10 mx-auto animate-pulse">
-        <h1 className="w-48 h-2 mx-auto bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
-
-        <p className="w-64 h-2 mx-auto mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-        <p className="w-64 h-2 mx-auto mt-4 bg-gray-200 rounded-lg sm:w-80 dark:bg-gray-700"></p>
-
-        <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 sm:grid-cols-2 xl:grid-cols-4 lg:grid-cols-3">
-            <div className="w-full ">
+    return (
+      <section className="bg-white dark:bg-gray-900">
+        <div className="container px-6 py-10 mx-auto animate-pulse">
+          <h1 className="w-48 h-2 mx-auto bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
+          <p className="w-64 h-2 mx-auto mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+          <p className="w-64 h-2 mx-auto mt-4 bg-gray-200 rounded-lg sm:w-80 dark:bg-gray-700"></p>
+          <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 sm:grid-cols-2 xl:grid-cols-4 lg:grid-cols-3">
+            {[...Array(8)].map((_, index) => (
+              <div key={index} className="w-full">
                 <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                
                 <h1 className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
                 <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            </div>
-
-            <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                
-                <h1 className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            </div>
-
-            <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                
-                <h1 className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            </div>
-
-            <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                
-                <h1 className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            </div>
-
-            <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                
-                <h1 className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            </div>
-
-            <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                
-                <h1 className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            </div>
-
-            <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                
-                <h1 className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            </div>
-
-            <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                
-                <h1 className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            </div>
+              </div>
+            ))}
+          </div>
         </div>
-    </div>
-</section></div>;
+      </section>
+    );
   } else if (productStatus === 'failed') {
-    return <div>Error: {error}</div>;
+    return (
+      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <strong className="font-bold">Error:</strong>
+        <span className="block sm:inline">{error}</span>
+      </div>
+    );
   }
+
   const filteredProducts = products.filter(product => product.category === 'Newiphone');
+  
   return (
     <div>
       <NavBar />
@@ -105,15 +63,10 @@ const NewIphone = () => {
                   <h5 className="text-xl font-semibold tracking-tight text-slate-900">{product.title}</h5>
                 </Link>
                 <div className="mt-2.5 mb-5 flex items-center">
-                <span className="text-sm text-red-600 line-through">${product.initial_rate}</span>
-
-
-                  {/* Add more star SVGs based on product.rating */}
+                  <span className="text-sm text-red-600 line-through">${product.initial_rate}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <p>
-                  <span className="text-1xl font-bold text-red-500">RS.{product.final_rate}</span>
-                  </p>
+                  <p><span className="text-1xl font-bold text-red-500">RS.{product.final_rate}</span></p>
                   <Link to={`/productdetail/${product.id}`} 
                     className="flex items-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
                     <svg 

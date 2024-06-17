@@ -1,10 +1,11 @@
+// Flashsaleshop.js
+
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchFlashSales } from '../slice/FlashsaleSlice';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import NavBar from '../components/NavBar';
-import flashSaleDetails from '../Shop/flashSaleDetails';
 
 const Flashsaleshop = () => {
   const dispatch = useDispatch();
@@ -19,72 +20,7 @@ const Flashsaleshop = () => {
   }, [flashSalesStatus, dispatch]);
 
   if (flashSalesStatus === 'loading') {
-    return <div><section class="bg-white dark:bg-gray-900">
-    <div className="container px-6 py-10 mx-auto animate-pulse">
-        <h1 className="w-48 h-2 mx-auto bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
-
-        <p className="w-64 h-2 mx-auto mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-        <p className="w-64 h-2 mx-auto mt-4 bg-gray-200 rounded-lg sm:w-80 dark:bg-gray-700"></p>
-
-        <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 sm:grid-cols-2 xl:grid-cols-4 lg:grid-cols-3">
-            <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                
-                <h1 className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            </div>
-
-            <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                
-                <h1 className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            </div>
-
-            <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                
-                <h1 className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            </div>
-
-            <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                
-                <h1 className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            </div>
-
-            <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                
-                <h1 className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            </div>
-
-            <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                
-                <h1 className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            </div>
-
-            <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                
-                <h1 className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            </div>
-
-            <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                
-                <h1 className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            </div>
-        </div>
-    </div>
-</section></div>;
+    return <div>Loading...</div>;
   } else if (flashSalesStatus === 'failed') {
     return <div>Error: {error}</div>;
   }
@@ -94,18 +30,18 @@ const Flashsaleshop = () => {
       <NavBar />
       <div className="flex flex-wrap justify-center">
         {flashSales.map((product) => (
-          <div key='${product.id}' className="relative m-10 w-full max-w-xs overflow-hidden rounded-lg bg-white shadow-md">
+          <div key={product.id} className="relative m-10 w-full max-w-xs overflow-hidden rounded-lg bg-white shadow-md">
             <Link to={`/productdetail/${product.id}`}>
-              <img className="h-60 rounded-t-lg object-cover" src={product.pic}alt={product.title} />
+              <img className="h-60 rounded-t-lg object-cover" src={`http://localhost:8000${product.pic}`}    alt={product.title} />
             </Link>
-            <span className="absolute top-0 left-0 w-28 translate-y-4 -translate-x-6 -rotate-45 bg-red-600 text-center text-sm text-white">{product.discount_percentage}%OFF</span>
+            <span className="absolute top-0 left-0 w-28 translate-y-4 -translate-x-6 -rotate-45 bg-red-600 text-center text-sm text-white">
+              {product.discount_percentage.toFixed(2)}% OFF
+            </span>
             <div className="mt-4 px-5 pb-5">
               <Link to={`/productdetail/${product.id}`}>
                 <h5 className="text-xl font-semibold tracking-tight text-slate-900">{product.title}</h5>
               </Link>
               <span className="text-3xl font-bold text-slate-900">${product.final_rate}</span>
-
-
               <div className="flex items-center justify-between">
                 <p>
                   <span className="text-sm text-slate-900 line-through">${product.initial_rate}</span>
@@ -124,6 +60,6 @@ const Flashsaleshop = () => {
       <Footer />
     </div>
   );
-}
+};
 
 export default Flashsaleshop;

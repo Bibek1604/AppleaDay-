@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 
 
 const FlashSales = () => {  
+  
   return (
     <div className="flex flex-col items-center py-8">
       <div className="flex items-start justify-center w-full gap-12 mt-11 place-content-evenly">

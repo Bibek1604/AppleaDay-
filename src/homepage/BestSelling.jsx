@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchbestsale } from '../slice/bestsaleSlice'; // Adjust the import path
-import { addItem } from '../slice/cartSlice'; // Adjust the import path
-
+import { addItem } from '../slice/cartSlice'; 
+import { fetchProducts } from '../slice/bestsaleSlice';
 const BestSelling = () => {
   const dispatch = useDispatch();
   const { bestsale, status, error } = useSelector(state => state.bestsale);
 
   useEffect(() => {
     if (status === 'idle') {
-      dispatch(fetchbestsale());
+      dispatch(fetchProducts());
     }
   }, [status, dispatch]);
 
@@ -36,7 +35,7 @@ const BestSelling = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {bestsale.slice(0, 4).map((product) => (
           <div key={product.id} className="border p-4 rounded-lg text-center">
-            <img src={product.pic} alt={product.title} className="mb-4 w-full h-40 object-cover" />
+            <img src={`http://localhost:8000${product.pic}`} alt={product.title} className="mb-4 w-full h-40 object-cover" />
             <h4 className="text-lg font-bold mb-2">{product.title}</h4>
             <div className="mb-2">
               <span className="text-red-600 text-xl font-bold">Rs.{product.final_rate}</span>

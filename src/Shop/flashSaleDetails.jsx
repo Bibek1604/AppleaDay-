@@ -5,11 +5,9 @@ import { fetchFlashSales } from '../slice/FlashsaleSlice';
 import { addItem } from '../slice/cartSlice';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
-import FlashProduct from '../homepage/FlashProduct';
-
 
 const FlashSaleDetails = () => {
-  const { productId } = useParams();  // Get the productId from route parameters
+  const { productId } = useParams();
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
 
@@ -22,10 +20,8 @@ const FlashSaleDetails = () => {
   }, [status, dispatch]);
 
   const product = flashSales.find((item) => item.id === parseInt(productId));
-  
 
-
-  const handleAddItem = () => {                          /////////add to cart disppatch
+  const handleAddItem = () => {
     dispatch(addItem({ ...product, quantity }));
   };
 
@@ -73,7 +69,7 @@ const FlashSaleDetails = () => {
       <div className="flex flex-col lg:flex-row bg-white shadow-md p-6">
         <div className="flex-1">
           <img
-            src={product.pic}
+            src={`http://localhost:8000${product.pic}`}   
             
             alt={product.title}
             className="w-full max-w-sm mx-auto"

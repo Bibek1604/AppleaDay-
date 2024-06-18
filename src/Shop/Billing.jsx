@@ -1,12 +1,54 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import cartSlice from '../slice/cartSlice';
-
-
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { placeOrder } from '../slice/orderSlice';
 
 const Billing = () => {
   const cartItems = useSelector((store) => store.cart.cartItems);
   const discount = useSelector((store) => store.coupons.discount);
+  const dispatch = useDispatch();
+
+  const [formData, setFormData] = useState({
+    first_name: '',
+    last_name: '',
+    email: '',
+    phone_number: '',
+    address_line: '',
+    city: '',
+    state: '',
+    zip_code: '',
+    payment_method: 'cash',
+    products: [],
+    total_cost: 0
+  });
+
+  useEffect(() => {
+    const products = cartItems.map((item) => ({
+      id: item.id,
+      quantity: item.quantity,
+      final_rate: item.final_rate
+    }));
+
+    const totalCostBeforeDiscount = calculateTotalCost();
+    const totalCostAfterDiscount = totalCostBeforeDiscount - (discount || 0);
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      products,
+      total_cost: totalCostAfterDiscount
+    }));
+  }, [cartItems, discount]);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(placeOrder(formData));
+  };
 
   const calculateTotalCost = () => {
     return cartItems.reduce((total, item) => {
@@ -41,13 +83,6 @@ const Billing = () => {
                 <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2" href="#">2</a>
                 <span className="font-semibold text-gray-900">Shipping</span>
               </li>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-              </svg>
-              {/* <li className="flex items-center space-x-3 text-left sm:space-x-4">
-                <a className="flex h-6 w-6 items-center justify-center rounded-full bg-gray-400 text-xs font-semibold text-white" href="#">3</a>
-                <span className="font-semibold text-gray-500">Payment</span>
-              </li> */}
             </ul>
           </div>
         </div>
@@ -95,74 +130,132 @@ const Billing = () => {
           </form>
         </div>
         <div className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
-          <p className="text-xl font-medium">Payment Details</p>
-          <p className="text-gray-400">Complete your order by providing your payment details.</p>
-          <div className="">
-            <label htmlFor="email" className="mt-4 mb-2 block text-sm font-medium">Email</label>
-            <div className="relative">
-              <input type="text" id="email" name="email" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="your.email@gmail.com" />
-              <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M16 12H8m0 0h.01M12 8v8m4-12H8a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V6a2 2 0 00-2-2z" />
-                </svg>
-              </div>
+          <div className="mt-6 border-t border-b py-2">
+            <div className="flex items-center justify-between">
+              <p className="text-sm font-medium text-gray-900">Subtotal</p>
+              <p className="font-semibold text-gray-900">Rs.{totalCostBeforeDiscount.toFixed(2)}</p>
             </div>
-            <label htmlFor="card-holder" className="mt-4 mb-2 block text-sm font-medium">Your Full Name</label>
-            <div className="relative">
-              <input type="text" id="card-holder" name="card-holder" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Your full name here" />
-              <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                </svg>
-              </div>
+            <div className="flex items-center justify-between">
+              <p className="text-sm font-medium text-gray-900">Delivery</p>
+              <p className="font-semibold text-gray-900">Free</p>
             </div>
-            <label htmlFor="card-holder" className="mt-4 mb-2 block text-sm font-medium">Your Phone Number </label>
-            <div className="relative">
-              <input type="text" id="card-holder" name="card-holder" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Your Phone number here" />
-              <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-                </svg>
-              </div>
-            </div>
- 
- 
-            <label htmlFor="billing-address" className="mt-4 mb-2 block text-sm font-medium">Billing Address</label>
-            <div className="flex flex-col sm:flex-row">
-              <div className="relative flex-shrink-0 sm:w-7/12">
-                <input type="text" id="billing-address" name="billing-address" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="Street Address" />
-
-                <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
-                  <img className="h-4 w-4 object-contain" src="https://flagpack.xyz/_nuxt/a98a5a6.png" alt="" />
-                  
-                </div>
-                
-              </div>
-              
-              
-
-              <input type="text" name="billing-zip" className="mt-4 flex-shrink-0 rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500 sm:mt-0 sm:ml-3" placeholder="ZIP" />
-            </div>
-            <div className="mt-6 border-t border-b py-2">
-              <div className="flex items-center justify-between">
-                <p className="text-sm font-medium text-gray-900">Subtotal</p>
-                <p className="font-semibold text-gray-900">Rs.{totalCostBeforeDiscount.toFixed(2)}</p>
-              </div>
-              <div className="flex items-center justify-between">
-                <p className="text-sm font-medium text-gray-900">Delivary</p>
-                <p className="font-semibold text-gray-900">Free</p>
-              </div>
-              <div className="flex items-center justify-between">
-                <p className="text-sm font-medium text-gray-900">Discount</p>
-                <p className="font-semibold text-gray-900">Rs.{discount.toFixed(2)}</p>
-              </div>
-            </div>
-            <div className="mt-6 flex items-center justify-between">
-              <p className="text-sm font-medium text-gray-900">Total</p>
-              <p className="text-2xl font-semibold text-gray-900">Rs.{totalCostAfterDiscount.toFixed(2)}</p>
+            <div className="flex items-center justify-between">
+              <p className="text-sm font-medium text-gray-900">Discount</p>
+              <p className="font-semibold text-gray-900">Rs.{discount.toFixed(2)}</p>
             </div>
           </div>
-          <button className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">Place Order</button>
+          <div className="mt-6 flex items-center justify-between">
+            <p className="text-sm font-medium text-gray-900">Total</p>
+            <p className="text-2xl font-semibold text-gray-900">Rs.{totalCostAfterDiscount.toFixed(2)}</p>
+          </div>
+          <form onSubmit={handleSubmit} className="bg-gray-50 rounded-lg p-6 shadow-md max-w-lg mx-auto">
+  <div className="mb-4">
+    <label htmlFor="first_name" className="block text-sm font-medium text-gray-700">First Name</label>
+    <input
+      type="text"
+      id="first_name"
+      name="first_name"
+      placeholder="Enter your first name"
+      className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+      value={formData.first_name}
+      onChange={handleChange}
+    />
+  </div>
+  <div className="mb-4">
+    <label htmlFor="last_name" className="block text-sm font-medium text-gray-700">Last Name</label>
+    <input
+      type="text"
+      id="last_name"
+      name="last_name"
+      placeholder="Enter your last name"
+      className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+      value={formData.last_name}
+      onChange={handleChange}
+    />
+  </div>
+  <div className="mb-4">
+    <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      placeholder="Enter your email address"
+      className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+      value={formData.email}
+      onChange={handleChange}
+    />
+  </div>
+  <div className="mb-4">
+    <label htmlFor="phone_number" className="block text-sm font-medium text-gray-700">Phone Number</label>
+    <input
+      type="tel"
+      id="phone_number"
+      name="phone_number"
+      placeholder="Enter your phone number"
+      className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+      value={formData.phone_number}
+      onChange={handleChange}
+    />
+  </div>
+  <div className="mb-4">
+    <label htmlFor="address_line" className="block text-sm font-medium text-gray-700">Address Line</label>
+    <input
+      type="text"
+      id="address_line"
+      name="address_line"
+      placeholder="Enter your address"
+      className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+      value={formData.address_line}
+      onChange={handleChange}
+    />
+  </div>
+  <div className="mb-4">
+    <label htmlFor="city" className="block text-sm font-medium text-gray-700">City</label>
+    <input
+      type="text"
+      id="city"
+      name="city"
+      placeholder="Enter your city"
+      className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+      value={formData.city}
+      onChange={handleChange}
+    />
+  </div>
+  <div className="mb-4">
+    <label htmlFor="state" className="block text-sm font-medium text-gray-700">State</label>
+    <input
+      type="text"
+      id="state"
+      name="state"
+      placeholder="Enter your state"
+      className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+      value={formData.state}
+      onChange={handleChange}
+    />
+  </div>
+  <div className="mb-4">
+    <label htmlFor="zip_code" className="block text-sm font-medium text-gray-700">ZIP Code</label>
+    <input
+      type="text"
+      id="zip_code"
+      name="zip_code"
+      placeholder="Enter your ZIP code"
+      className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+      value={formData.zip_code}
+      onChange={handleChange}
+    />
+  </div>
+  <div className="mb-4">
+    <input type="hidden" name="payment_method" value={formData.payment_method} />
+  </div>
+  <button
+    type="submit"
+    className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md"
+  >
+    Place Order
+  </button>
+</form>
+
         </div>
       </div>
     </div>

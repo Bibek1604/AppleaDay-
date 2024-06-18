@@ -1,47 +1,46 @@
-import React from 'react'
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios'
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
-export const fetchOrder = createAsyncThunk('order/fetchOrder', async () => {
+export const fetchOrders = createAsyncThunk(
+  "orders/fetchOrders",
+  async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.post('http://127.0.0.1:8000/order/');
+      const response = await axios.get("http://127.0.0.1:8000/order/");
       return response.data;
     } catch (error) {
-      throw error;
+      return rejectWithValue(error.response.data || 'Failed to fetch orders');
     }
-  });
-  
+  }
+);
 
-const initialState = {
-    order: [],
-    status: 'idle',
-    error: null,
-    };
-
-
-
-
-const  orderSlice = createSlice ({
-  name: 'order',
-  initialState,
-  reducers: {},
+export const orderSlice = createSlice({
+  name: "orders",
+  initialState: {
+    orders: [],
+    status: "idle",
+    error: null
+  },
+  reducers: {
+    clearOrders: (state) => {
+      state.orders = [];
+    }
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchOrder.pending, (state) => {
-        state.status = 'loading';
-        state.error = null;
+      .addCase(fetchOrders.pending, (state) => {
+        state.status = "loading";
       })
-      .addCase(fetchOrder.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.order = action.payload;
-        state.error = null;
+      .addCase(fetchOrders.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.orders = action.payload;
       })
-      .addCase(fetchOrder.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message || 'An error occurred';
+      .addCase(fetchOrders.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload || action.error.message;
       });
-    },
-  });
+  }
+});
+
+export const { clearOrders } = orderSlice.actions;
 
 export default orderSlice.reducer;

@@ -19,7 +19,7 @@ const UsedIphone = () => {
   }, [productStatus, dispatch]);
 
   if (productStatus === 'loading') {
-    return <div><section class="bg-white dark:bg-gray-900">
+    return <div><section className="bg-white dark:bg-gray-900">
     <div className="container px-6 py-10 mx-auto animate-pulse">
         <h1 className="w-48 h-2 mx-auto bg-gray-200 rounded-lg dark:bg-gray-700"></h1>
 
@@ -88,7 +88,7 @@ const UsedIphone = () => {
   } else if (productStatus === 'failed') {
     return <div>Error: {error}</div>;
   }
-  const filteredProducts = products.filter(product => product.category === 'Old iPhone');
+  const filteredProducts = products.filter(product => product.category === 'OldiPhone');
 
   return (
     

@@ -26,7 +26,6 @@ const FlashProduct = () => {
     const quantity = 1; // Default quantity to add to cart
     dispatch(addItem({ ...product, quantity }));
   };  
-  // const imageUrl = `http://localhost:8000${flashSale.picUrl}`;
 
 
 
@@ -38,7 +37,7 @@ const FlashProduct = () => {
         {flashSales.slice(0, 4).map((flashSale) => (
           <div key={flashSale.id} className="border rounded-lg p-3 shadow-lg w-72 mx-auto">
             <div className="relative">
-              <img src={`http://localhost:8000${flashSale.pic}`}   alt={flashSale.title} className="w-full h-40 object-cover mb-4 rounded-lg" />
+              <img src={flashSale.pic}  alt={flashSale.title} className="w-50 h-40 object-cover mb-4 rounded-lg" />
               <span className="absolute top-2 left-0 bg-red-500 text-white text-xs px-2 py-1 rounded-r">
                 -{flashSale.discount_percent}%
               </span>

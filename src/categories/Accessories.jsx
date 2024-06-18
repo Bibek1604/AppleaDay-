@@ -23,7 +23,7 @@ const Accessories = () => {
   } else if (productStatus === 'failed') {
     return <div>Error: {error}</div>;
   }
-  const filteredProducts = products.filter(product => product.category === 'New iphone');
+  const filteredProducts = products.filter(product => product.category === 'Accessories');
 
   if(Accessories === 'loading'){  
     return <div><section class="bg-white dark:bg-gray-900">

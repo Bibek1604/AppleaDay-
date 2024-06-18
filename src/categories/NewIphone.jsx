@@ -45,7 +45,7 @@ const NewIphone = () => {
     );
   }
 
-  const filteredProducts = products.filter(product => product.category === 'Newiphone');
+  const filteredProducts = products.filter(product => product.category === 'NewiPhone');
   
   return (
     <div>

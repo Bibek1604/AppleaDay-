@@ -259,7 +259,7 @@ const Billing = () => {
         </div>
       </div>
     </div>
-  );
+  
 };
 
 export default Billing;

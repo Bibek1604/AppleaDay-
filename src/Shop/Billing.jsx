@@ -24,6 +24,8 @@ const Billing = () => {
   useEffect(() => {
     const products = cartItems.map((item) => ({
       id: item.id,
+      title: item.title,
+      pic: item.pic, // Assuming pic is the image URL
       quantity: item.quantity,
       final_rate: item.final_rate
     }));
@@ -47,6 +49,7 @@ const Billing = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     dispatch(placeOrder(formData));
   };
 
@@ -57,9 +60,6 @@ const Billing = () => {
       return total + itemPrice * itemQuantity;
     }, 0);
   };
-
-  const totalCostBeforeDiscount = calculateTotalCost();
-  const totalCostAfterDiscount = totalCostBeforeDiscount - (discount || 0);
 
   return (
     <div>
@@ -104,36 +104,57 @@ const Billing = () => {
             ))}
           </div>
           <p className="mt-8 text-lg font-medium">Shipping Methods</p>
-          <form className="mt-5 grid gap-6">
+          <form onSubmit={handleSubmit} className="mt-5 grid gap-6">
             <div className="relative">
-              <input className="peer hidden" id="radio_1" type="radio" name="radio" checked />
-              <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
-              <label className="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4" htmlFor="radio_1">
-                <img className="w-14 object-contain" src="/images/naorrAeygcJzX0SyNI4Y0.png" alt="" />
+              <input
+                type="radio"
+                id="cash_on_delivery"
+                name="payment_method"
+                value="cash"
+                checked={formData.payment_method === 'cash'}
+                onChange={handleChange}
+                className="hidden peer"
+              />
+              <label
+                htmlFor="cash_on_delivery"
+                className="peer-checked:border-2 peer-checked:border-indigo-500 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
+              >
+                <img className="w-14 object-contain" src="/images/cash-on-delivery.png" alt="Cash On Delivery" />
                 <div className="ml-5">
                   <span className="mt-2 font-semibold">Cash On Delivery</span>
-                  <p className="text-slate-500 text-sm leading-6"></p>
+                  <p className="text-slate-500 text-sm leading-6">Pay cash when you receive your order</p>
                 </div>
               </label>
             </div>
-            <div className="relative">
-              <input className="peer hidden" id="radio_2" type="radio" name="radio" checked />
-              <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
-              <label className="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4" htmlFor="radio_2">
-                <img className="w-14 object-contain" src="/images/oG8xsl3xsOkwkMsrLGKM4.png" alt="" />
+            <div className="relative mt-4">
+              <input
+                type="radio"
+                id="pay_online"
+                name="payment_method"
+                value="delivery"
+                checked={formData.payment_method === 'delivery'}
+                onChange={handleChange}
+                className="hidden peer"
+              />
+              <label
+                htmlFor="pay_online"
+                className="peer-checked:border-2 peer-checked:border-indigo-500 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
+              >
+                <img className="w-14 object-contain" src="/images/pay-with-khalti.png" alt="Pay Online" />
                 <div className="ml-5">
                   <span className="mt-2 font-semibold">Pay with Khalti</span>
-                  <p className="text-slate-500 text-sm leading-6"></p>
+                  <p className="text-slate-500 text-sm leading-6">Pay online using Khalti</p>
                 </div>
               </label>
             </div>
+            {/* Additional shipping methods can be added similarly */}
           </form>
         </div>
         <div className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
           <div className="mt-6 border-t border-b py-2">
             <div className="flex items-center justify-between">
               <p className="text-sm font-medium text-gray-900">Subtotal</p>
-              <p className="font-semibold text-gray-900">Rs.{totalCostBeforeDiscount.toFixed(2)}</p>
+              <p className="font-semibold text-gray-900">Rs.{calculateTotalCost().toFixed(2)}</p>
             </div>
             <div className="flex items-center justify-between">
               <p className="text-sm font-medium text-gray-900">Delivery</p>
@@ -146,21 +167,23 @@ const Billing = () => {
           </div>
           <div className="mt-6 flex items-center justify-between">
             <p className="text-sm font-medium text-gray-900">Total</p>
-            <p className="text-2xl font-semibold text-gray-900">Rs.{totalCostAfterDiscount.toFixed(2)}</p>
+            <p className="text-2xl font-semibold text-gray-900">Rs.{formData.total_cost.toFixed(2)}</p>
           </div>
           <form onSubmit={handleSubmit} className="bg-gray-50 rounded-lg p-6 shadow-md max-w-lg mx-auto">
-  <div className="mb-4">
-    <label htmlFor="first_name" className="block text-sm font-medium text-gray-700">First Name</label>
-    <input
-      type="text"
-      id="first_name"
-      name="first_name"
-      placeholder="Enter your first name"
-      className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-      value={formData.first_name}
-      onChange={handleChange}
-    />
-  </div>
+            <div className="mb-4">
+              <label htmlFor="first_name" className="block text-sm font-medium text-gray-700">First Name</label>
+              <input
+                type="text"
+                id="first_name"
+                name="first_name"
+                placeholder="Enter your first name"
+                className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                value={formData.first_name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
   <div className="mb-4">
     <label htmlFor="last_name" className="block text-sm font-medium text-gray-700">Last Name</label>
     <input

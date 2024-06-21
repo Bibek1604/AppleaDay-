@@ -99,12 +99,12 @@ const FlashSaleDetails = () => {
             <p><strong>Storage:</strong> {product.storage}</p>
             <p><strong>Warranty:</strong> {product.warranty}</p>
           </div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <h3 className="text-lg font-medium mb-2">Select Size</h3>
             <button className="border border-gray-300 py-1 px-3 mr-2">Small</button>
             <button className="border border-gray-300 py-1 px-3 mr-2">Medium</button>
             <button className="border border-gray-300 py-1 px-3">Large</button>
-          </div>
+          </div> */}
         </div>
       </div>
       <Footer />

@@ -30,7 +30,7 @@ function Login() {
             username: '',
             password: '',
           });
-          navigate();      //to navigate after login . keep it later
+          navigate();      //to navigate after login . keep the link of page after navbarlater
         
         } else if (fetchLogin.rejected.match(action)) {
           console.error('Login failed:', action.payload);
@@ -94,7 +94,7 @@ function Login() {
           </form>
 
           {loginStatus === 'failed' && (
-            <p className="mt-2 text-center text-sm text-red-600">{loginError}</p>
+            <p className="mt-2 text-center text-sm text-red-600">Please Enter Correct Values</p>
           )}
 
           <p className="mt-8 text-center text-sm text-gray-500">

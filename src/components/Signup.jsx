@@ -1,61 +1,165 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Footer from './Footer';
-import Top from './Top';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { fetchSignup } from '../slice/signupSlice';
+import { fetchLogin } from '../slice/loginSlice'; // Ensure this path is correct
+import Footer from '../components/Footer';
+import Top from '../components/Top';
+import logo from '../assets/logo.jpg';
 
 function Signup() {
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    first_name: '',
+    last_name: '',
+    password: '',
+  });
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const registerStatus = useSelector((state) => state.signup.status);
+  const registerError = useSelector((state) => state.signup.error);
+
+  useEffect(() => {
+    if (registerStatus === 'succeeded') {
+      dispatch(fetchLogin({ username: formData.username, password: formData.password }))
+        .then((action) => {
+          if (action.type === 'login/fetchLogin/fulfilled') {
+            setFormData({
+              username: '',
+              email: '',
+              first_name: '',
+              last_name: '',
+              password: '',
+            });
+            navigate('/login'); // Navigate to the dashboard or a protected route after successful login
+          } else {
+            console.error('Login failed:', action.error.message);
+          }
+        });
+    }
+  }, [registerStatus, dispatch, formData.username, formData.password, navigate]);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(fetchSignup(formData));
+  };
+
   return (
     <div>
       <Top />
-      <div className="bg-white dark:bg-gray-900">
-        <div className="flex justify-center h-screen">
-          <div className="hidden bg-cover lg:block lg:w-2/3" style={{backgroundImage: 'url(https://images.unsplash.com/photo-1616763355603-9755a640a287?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)'}}>
-            <div className="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
-              <div>
-                <h2 className="text-2xl font-bold text-white sm:text-3xl">Meraki UI</h2>
-                <p className="max-w-xl mt-3 text-gray-300">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. In
-                  autem ipsa, nulla laboriosam dolores, repellendus perferendis libero suscipit nam temporibus
-                  molestiae
-                </p>
-              </div>
+      <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="sm:mx-auto sm:w-full sm:max-w-md">
+          <Link to="/" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+            <img className="w-50 h-20 mr-2" src={logo} alt="logo" />
+          </Link>
+          <h2 className="mt-10 text-center text-2xl text-gray-900">
+            Create an account
+          </h2>
+        </div>
+
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-md">
+          <form className="space-y-6" onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
+                Username
+              </label>
+              <input
+                id="username"
+                name="username"
+                type="text"
+                value={formData.username}
+                onChange={handleChange}
+                required
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              />
             </div>
-          </div>
 
-          <div className="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
-            <div className="flex-1">
-              <div className="text-center">
-                <div className="flex justify-center mx-auto">
-                  <img className="w-auto h-7 sm:h-8" src="https://merakiui.com/images/logo.svg" alt="" />
-                </div>
-                <p className="mt-3 text-gray-500 dark:text-gray-300">Sign up for an account</p>
-              </div>
-
-              <div className="mt-8">
-                <form>
-                  <div>
-                    <label htmlFor="email" className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email Address</label>
-                    <input type="email" name="email" id="email" placeholder="example@example.com" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
-                  </div>
-
-                  <div className="mt-6">
-                    <div className="flex justify-between mb-2">
-                      <label htmlFor="password" className="text-sm text-gray-600 dark:text-gray-200">Password</label>
-                      <a href="#" className="text-sm text-gray-400 focus:text-blue-500 hover:text-blue-500 hover:underline">Forgot password?</a>
-                    </div>
-                    <input type="password" name="password" id="password" placeholder="Your Password" className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
-                  </div>
-
-                  <div className="mt-6">
-                    <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-                      Sign up
-                    </button>
-                  </div>
-                </form>
-                <p className="mt-6 text-sm text-center text-gray-400">Already have an account? <Link to="/login" className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">Sign in here</Link>.</p>
-              </div>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+                Email address
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              />
             </div>
-          </div>
+
+            <div>
+              <label htmlFor="first_name" className="block text-sm font-medium leading-6 text-gray-900">
+                First Name
+              </label>
+              <input
+                id="first_name"
+                name="first_name"
+                type="text"
+                value={formData.first_name}
+                onChange={handleChange}
+                required
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="last_name" className="block text-sm font-medium leading-6 text-gray-900">
+                Last Name
+              </label>
+              <input
+                id="last_name"
+                name="last_name"
+                type="text"
+                value={formData.last_name}
+                onChange={handleChange}
+                required
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+                Password
+              </label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              />
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Sign up
+              </button>
+            </div>
+          </form>
+
+          {registerStatus === 'failed' && (
+            <p className="mt-2 text-center text-sm text-red-600">{registerError}</p>
+          )}
+
+          <p className="mt-8 text-center text-sm text-gray-500">
+            Already have an account?{' '}
+            <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
+              Sign in
+            </Link>
+          </p>
         </div>
       </div>
       <Footer />

@@ -35,10 +35,11 @@ const About = () => {
                     </p>
                 </details>
             </div>
+
             <div class="py-5">
                 <details class="group">
                     <summary class="flex cursor-pointer list-none items-center justify-between font-medium">
-                        <span> Can I get a refund for my subscription?</span>
+                        <span>  Do you offer repair services for mobile devices?</span>
                         <span class="transition group-open:rotate-180">
                                 <svg fill="none" height="24" shape-rendering="geometricPrecision"
                                     stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -47,18 +48,17 @@ const About = () => {
                                 </svg>
                             </span>
                     </summary>
-                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">We offer a 30-day money-back
-                        guarantee for most of its subscription plans. If you are not satisfied with your
-                        subscription within the first 30 days, you can request a full refund. Refunds for
-                        subscriptions that have been active for longer than 30 days may be considered on a
-                        case-by-case basis.
+                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">Yes, we provide repair services for mobile devices, including screen repairs, battery replacements, software troubleshooting, and more. Our experienced technicians strive to offer fast and reliable repair solutions to ensure your device is back up and running smoothly.
+
+
                     </p>
                 </details>
             </div>
             <div class="py-5">
                 <details class="group">
                     <summary class="flex cursor-pointer list-none items-center justify-between font-medium">
-                        <span> How do I cancel my subscription?</span>
+                        <span>How long does shipping take?
+                        </span>
                         <span class="transition group-open:rotate-180">
                                 <svg fill="none" height="24" shape-rendering="geometricPrecision"
                                     stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -67,16 +67,17 @@ const About = () => {
                                 </svg>
                             </span>
                     </summary>
-                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">To cancel your subscription, you can
-                        log in to your account and navigate to the subscription management page. From there, you
-                        should be able to cancel your subscription and stop future billing.
+                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">Shipping times vary depending on the
+                        shipping method you choose and your location. Standard shipping typically takes 3-5 business
+                        days, while expedited shipping can take 1-2 business days. 
                     </p>
                 </details>
             </div>
             <div class="py-5">
                 <details class="group">
                     <summary class="flex cursor-pointer list-none items-center justify-between font-medium">
-                        <span> Is there a free trial?</span>
+                        <span>What payment methods are accepted?
+                        </span>
                         <span class="transition group-open:rotate-180">
                                 <svg fill="none" height="24" shape-rendering="geometricPrecision"
                                     stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -85,16 +86,16 @@ const About = () => {
                                 </svg>
                             </span>
                     </summary>
-                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">We offer a free trial of our software
-                        for a limited time. During the trial period, you will have access to a limited set of
-                        features and functionality, but you will not be charged.
+                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">We accept a variety of payment methods,
+                        Bank transfer,E-sewa,Khalti including Cash on Delivery.
                     </p>
                 </details>
             </div>
             <div class="py-5">
                 <details class="group">
                     <summary class="flex cursor-pointer list-none items-center justify-between font-medium">
-                        <span> How do I contact support?</span>
+                        <span>What is the return policy?
+                        </span>
                         <span class="transition group-open:rotate-180">
                                 <svg fill="none" height="24" shape-rendering="geometricPrecision"
                                     stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -103,16 +104,15 @@ const About = () => {
                                 </svg>
                             </span>
                     </summary>
-                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">If you need help with our platform or
-                        have any other questions, you can contact the company's support team by submitting a support
-                        request through the website or by emailing support@ourwebsite.com.
+                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">Yes, we provide Return Policy coverage for all new mobile devices purchased from our shop. The Return Policy duration and terms may vary depending on the manufacturer and the specific product. Please refer to the product documentation or contact our customer support for detailed Return Policy information.
                     </p>
                 </details>
             </div>
             <div class="py-5">
                 <details class="group">
                     <summary class="flex cursor-pointer list-none items-center justify-between font-medium">
-                        <span> Do you offer any discounts or promotions?</span>
+                        <span>Is your product trusted by other customers?
+                        </span>
                         <span class="transition group-open:rotate-180">
                                 <svg fill="none" height="24" shape-rendering="geometricPrecision"
                                     stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -121,12 +121,47 @@ const About = () => {
                                 </svg>
                             </span>
                     </summary>
-                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">We may offer discounts or promotions
-                        from time to time. To stay up-to-date on the latest deals and special offers, you can sign
-                        up for the company's newsletter or follow it on social media.
+                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">Yes, we have a large number of
+                        satisfied customers who have purchased our products and services. 
                     </p>
                 </details>
             </div>
+            <div class="py-5">
+                <details class="group">
+                    <summary class="flex cursor-pointer list-none items-center justify-between font-medium">
+                        <span> How can I contact technical support for urgent issues?
+                        </span>
+                        <span class="transition group-open:rotate-180">
+                                <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                    <path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </span>
+                    </summary>
+                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">You can contact our technical support team through
+                        our Instagram page or by calling our support line . For urgent issues, 
+                    </p>
+                </details>
+            </div>
+            <div class="py-5">
+                <details class="group">
+                    <summary class="flex cursor-pointer list-none items-center justify-between font-medium">
+                        <span> Do you provide any  Disocunt,offers and coupons?
+                        </span>
+                        <span class="transition group-open:rotate-180">
+                                <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                    <path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </span>
+                    </summary>
+                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">Yes, we offer a variety of discounts, offers, and coupons to help you save on your purchases. Be sure to check our website regularly for the latest deals and promotions.
+                    </p>
+                </details>
+            </div>
+            
         </div>
     </div>
 </div>

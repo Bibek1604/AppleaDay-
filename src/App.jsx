@@ -3,13 +3,11 @@ import { Accessories, Earbuds, Electronics, Laptop, NewIphone, UsedAndroid,Billi
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store/Store';
-
 function App() {
   return (
     <Provider store={store}>
       <Router>
         <Routes>
-          
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
@@ -32,6 +30,7 @@ function App() {
           <Route path='/bestsellingshop' element={<Bestsellingshop />} />
           <Route path='/bestsellingshopdetails/:id' element={<Bestsellingshopdetails />} />
           <Route path='/billing' element={<Billing />} />
+
           
 
          

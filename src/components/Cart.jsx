@@ -68,8 +68,8 @@ const Cart = () => {
             {cartItems.map((product) => (
               <div key={product.id} className="md:flex items-stretch py-8 md:py-10 lg:py-8 border-t border-gray-50">
                 <div className="md:w-4/12 2xl:w-1/4 w-full">
-                  <img src={product.pic}   alt={product.title} className="h-full object-center object-cover md:block hidden" />
-                  <img src={product.pic}  alt={product.title} className="md:hidden w-full h-full object-center object-cover" />
+                  <img src={`http://localhost:8000${product.pic}`}  alt={product.title} className="h-full object-center object-cover md:block hidden" />
+                  <img src={`http://localhost:8000${product.pic}`}  alt={product.title} className="md:hidden w-full h-full object-center object-cover" />
                 </div>
                 <div className="md:pl-3 md:w-8/12 2xl:w-3/4 flex flex-col justify-center">
                   <p className="text-xs leading-3 text-gray-800 md:pt-0 pt-4">{product.code}</p>
@@ -92,14 +92,15 @@ const Cart = () => {
                   <p className="text-xs leading-3 text-gray-600 py-4">Color: {product.color}</p>
                   <p className="w-96 text-xs leading-3 text-gray-600">Warranty: {product.warranty}</p>
                   <div className="flex items-center justify-between pt-5">
-                    <div className="flex items-center">
-                      <p
-                        className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer"
-                        onClick={() => handleRemoveProduct(product.id)}
-                      >
-                        Remove
-                      </p>
-                    </div>
+                  <div className="flex items-center">
+                          <p
+                    className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer"
+                          onClick={() => handleRemoveProduct(product.id)}
+                            >
+                        Remove  
+                                  </p>
+                              </div>
+
                     <p className="text font-black leading-none text-gray-800">
                       Rs{(parseFloat(product.final_rate) * parseInt(product.quantity)).toFixed(2)}
                     </p>

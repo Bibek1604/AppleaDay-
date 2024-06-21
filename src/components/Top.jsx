@@ -5,14 +5,14 @@ function Top() {
     <div className="bg-white shadow-md  flex flex-col">
       <div className="container mx-auto py-4 px-4 flex justify-between items-center">
         <div className="flex items-center space-x-8">
-          <h1 className="text-2xl font-bold">Exclusive</h1>
+          <h1 className="text-2xl font-bold">AppleDay</h1>
           <nav className="hidden md:flex space-x-4">
             <Link to="/" className="text-gray-700 hover:text-rose-600">Home</Link>
             <Link to="/contact" className="text-gray-700 hover:text-rose-600">Contact</Link>
             <Link to="/about" className="text-gray-700 hover:text-rose-600">About</Link>
-            <Link to="/signup" className="text-gray-700 hover:text-rose-600">Sign Up</Link>
+            <Link to="/login" className="text-gray-700 hover:text-rose-600">login</Link>
           </nav>
-        </div>+
+        </div>
         <div className="flex items-center space-x-4">
           <input 
             type="text" 

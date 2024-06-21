@@ -1,31 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { placeOrder } from '../slice/orderSlice';
+import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
+
+const initialFormData = {
+  first_name: '',
+  last_name: '',
+  email: '',
+  phone_number: '',
+  address_line: '',
+  city: '',
+  state: '',
+  zip_code: '',
+  payment_method: 'cash',
+  products: [],
+  total_cost: 0
+};
 
 const Billing = () => {
   const cartItems = useSelector((store) => store.cart.cartItems);
   const discount = useSelector((store) => store.coupons.discount);
   const dispatch = useDispatch();
 
-  const [formData, setFormData] = useState({
-    first_name: '',
-    last_name: '',
-    email: '',
-    phone_number: '',
-    address_line: '',
-    city: '',
-    state: '',
-    zip_code: '',
-    payment_method: 'cash',
-    products: [],
-    total_cost: 0
-  });
+  const [formData, setFormData] = useState(initialFormData);
 
   useEffect(() => {
     const products = cartItems.map((item) => ({
       id: item.id,
       title: item.title,
       pic: item.pic, // Assuming pic is the image URL
+      photo: item.photo, // Added photo title
       quantity: item.quantity,
       final_rate: item.final_rate
     }));
@@ -49,8 +54,8 @@ const Billing = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     dispatch(placeOrder(formData));
+    setFormData(initialFormData); // Reset the form to initial state
   };
 
   const calculateTotalCost = () => {
@@ -63,11 +68,12 @@ const Billing = () => {
 
   return (
     <div>
+      <NavBar />
       <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
-        <a href="#" className="text-2xl font-bold text-gray-800">sneekpeeks</a>
+        <a href="/" className="text-2xl font-bold text-blue-800">AppleDay</a>
         <div className="mt-4 py-2 text-xs sm:mt-0 sm:ml-auto sm:text-base">
           <div className="relative">
-            <ul className="relative flex w-full items-center justify-between space-x-2 sm:space-x-4">
+            <ul className="relative flex w-full center justify-between space-x-2 sm:space-x-4">
               <li className="flex items-center space-x-3 text-left sm:space-x-4">
                 <a className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-200 text-xs font-semibold text-emerald-700" href="#">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -98,7 +104,13 @@ const Billing = () => {
                 <div className="flex w-full flex-col px-4 py-4">
                   <span className="font-semibold">{item.title}</span>
                   <span className="float-right text-gray-400">{item.size}</span>
-                  <p className="text-lg font-bold">${item.final_rate}</p>
+                  <p className="text-lg font-bold">Rs.{item.final_rate}</p>
+                  <button
+                    onClick={() => handleItemClick(item.title, item.pic)} // Example function call with title and pic
+                    className="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-1 px-4 rounded-lg shadow-sm"
+                  >
+                    View Details
+                  </button>
                 </div>
               </div>
             ))}
@@ -119,7 +131,7 @@ const Billing = () => {
                 htmlFor="cash_on_delivery"
                 className="peer-checked:border-2 peer-checked:border-indigo-500 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
               >
-                <img className="w-14 object-contain" src="/images/cash-on-delivery.png" alt="Cash On Delivery" />
+                <img className="w-14 object-contain" src="https://rgslogistics.co/media/cod-services-1.png" alt="Cash On Delivery" />
                 <div className="ml-5">
                   <span className="mt-2 font-semibold">Cash On Delivery</span>
                   <p className="text-slate-500 text-sm leading-6">Pay cash when you receive your order</p>
@@ -140,7 +152,7 @@ const Billing = () => {
                 htmlFor="pay_online"
                 className="peer-checked:border-2 peer-checked:border-indigo-500 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
               >
-                <img className="w-14 object-contain" src="/images/pay-with-khalti.png" alt="Pay Online" />
+                <img className="w-14 object-contain" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEKzFucoObOEGJnoC9hs1TYcSTjMHtNhDDD2WqceitjuZjjTk2tnlp7Z7DNEp56F-ftR8&usqp=CAU" alt="Pay Online" />
                 <div className="ml-5">
                   <span className="mt-2 font-semibold">Pay with Khalti</span>
                   <p className="text-slate-500 text-sm leading-6">Pay online using Khalti</p>
@@ -183,104 +195,103 @@ const Billing = () => {
                 required
               />
             </div>
-
-  <div className="mb-4">
-    <label htmlFor="last_name" className="block text-sm font-medium text-gray-700">Last Name</label>
-    <input
-      type="text"
-      id="last_name"
-      name="last_name"
-      placeholder="Enter your last name"
-      className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-      value={formData.last_name}
-      onChange={handleChange}
-    />
-  </div>
-  <div className="mb-4">
-    <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-    <input
-      type="email"
-      id="email"
-      name="email"
-      placeholder="Enter your email address"
-      className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-      value={formData.email}
-      onChange={handleChange}
-    />
-  </div>
-  <div className="mb-4">
-    <label htmlFor="phone_number" className="block text-sm font-medium text-gray-700">Phone Number</label>
-    <input
-      type="tel"
-      id="phone_number"
-      name="phone_number"
-      placeholder="Enter your phone number"
-      className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-      value={formData.phone_number}
-      onChange={handleChange}
-    />
-  </div>
-  <div className="mb-4">
-    <label htmlFor="address_line" className="block text-sm font-medium text-gray-700">Address Line</label>
-    <input
-      type="text"
-      id="address_line"
-      name="address_line"
-      placeholder="Enter your address"
-      className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-      value={formData.address_line}
-      onChange={handleChange}
-    />
-  </div>
-  <div className="mb-4">
-    <label htmlFor="city" className="block text-sm font-medium text-gray-700">City</label>
-    <input
-      type="text"
-      id="city"
-      name="city"
-      placeholder="Enter your city"
-      className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-      value={formData.city}
-      onChange={handleChange}
-    />
-  </div>
-  <div className="mb-4">
-    <label htmlFor="state" className="block text-sm font-medium text-gray-700">State</label>
-    <input
-      type="text"
-      id="state"
-      name="state"
-      placeholder="Enter your state"
-      className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-      value={formData.state}
-      onChange={handleChange}
-    />
-  </div>
-  <div className="mb-4">
-    <label htmlFor="zip_code" className="block text-sm font-medium text-gray-700">ZIP Code</label>
-    <input
-      type="text"
-      id="zip_code"
-      name="zip_code"
-      placeholder="Enter your ZIP code"
-      className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-      value={formData.zip_code}
-      onChange={handleChange}
-    />
-  </div>
-  <div className="mb-4">
-    <input type="hidden" name="payment_method" value={formData.payment_method} />
-  </div>
-  <button
-    type="submit"
-    className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md"
-  >
-    Place Order
-  </button>
-</form>
-
+            <div className="mb-4">
+              <label htmlFor="last_name" className="block text-sm font-medium text-gray-700">Last Name</label>
+              <input
+                type="text"
+                id="last_name"
+                name="last_name"
+                placeholder="Enter your last name"
+                className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                value={formData.last_name}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email address"
+                className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="phone_number" className="block text-sm font-medium text-gray-700">Phone Number</label>
+              <input
+                type="tel"
+                id="phone_number"
+                name="phone_number"
+                placeholder="Enter your phone number"
+                className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                value={formData.phone_number}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="address_line" className="block text-sm font-medium text-gray-700">Address Line</label>
+              <input
+                type="text"
+                id="address_line"
+                name="address_line"
+                placeholder="Enter your address"
+                className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                value={formData.address_line}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="city" className="block text-sm font-medium text-gray-700">City</label>
+              <input
+                type="text"
+                id="city"
+                name="city"
+                placeholder="Enter your city"
+                className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                value={formData.city}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="state" className="block text-sm font-medium text-gray-700">State</label>
+              <input
+                type="text"
+                id="state"
+                name="state"
+                placeholder="Enter your state"
+                className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                value={formData.state}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="zip_code" className="block text-sm font-medium text-gray-700">ZIP Code</label>
+              <input
+                type="text"
+                id="zip_code"
+                name="zip_code"
+                placeholder="Enter your ZIP code"
+                className="mt-1 block w-full h-10 px-4 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                value={formData.zip_code}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-4">
+              <input type="hidden" name="payment_method" value={formData.payment_method} />
+            </div>
+        <button
+          type="submit"
+          className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md"
+        >
+          Place Order
+        </button>
+          </form>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

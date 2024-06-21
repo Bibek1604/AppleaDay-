@@ -1,13 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
-  const response = await axios.get('http://127.0.0.1:8000/products/');
+export const fetchLogin = createAsyncThunk('login/fetchLogin', async (loginData) => {
+  const response = await axios.post('http://127.0.0.1:8000/login/', loginData);
   return response.data;
 });
 
-const productsSlice = createSlice({
-  name: 'products',
+const loginSlice = createSlice({
+  name: 'login',
   initialState: {
     items: [],
     status: 'idle',
@@ -15,18 +15,18 @@ const productsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchProducts.pending, (state) => {
+      .addCase(fetchLogin.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchProducts.fulfilled, (state, action) => {
+      .addCase(fetchLogin.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.items = action.payload;
       })
-      .addCase(fetchProducts.rejected, (state, action) => {
+      .addCase(fetchLogin.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });
   },
 });
 
-export default productsSlice.reducer;
+export default loginSlice.reducer;

@@ -10,7 +10,6 @@ import Service from '../homepage/Service';
 import FlashProduct from './FlashProduct';
 import Flashsaleshop from '../Shop/Flashsaleshop';
 import About from '../components/About';
-
 function Home() {
     return (
         <>  

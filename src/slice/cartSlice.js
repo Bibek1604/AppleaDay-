@@ -3,32 +3,38 @@ import { createSlice } from "@reduxjs/toolkit";
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
-    cartItems: [],              ////keep it oi
+    cartItems: JSON.parse(localStorage.getItem("cartItems")) || [],
   },
   reducers: {
     addItem: (state, action) => {
       state.cartItems.push(action.payload);
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
     removeItem: (state, action) => {
       state.cartItems = state.cartItems.filter(item => item.id !== action.payload);
-    },
-    updateQuantity: (state, action) => {
-      const item = state.cartItems.find(item => item.id === action.payload.id);
-      if (item) {
-        item.quantity = action.payload.quantity;
-      }
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
     clearCart: (state) => {
-      state.cartItems.length = 0;
+      state.cartItems = [];
+      localStorage.removeItem("cartItems");
     },
-    updateCart(state, action) {
+    setCartItems: (state, action) => {
+      state.cartItems = action.payload;
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    },
+    updateQuantity: (state, action) => {
+      state.cartItems = state.cartItems.map(item => item.id === action.payload.id ? { ...item, quantity: action.payload.quantity } : item);
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    },
+    updateCart: (state, action) => {  
       state.cartItems = action.payload;
     },
-  }
+
+  },
 });
 
-export const { removeFromCart } = cartSlice.actions;
+export const { addItem, removeItem, clearCart, setCartItems, updateCart, updateQuantity , removeFromCart} = cartSlice.actions;
 
+export const selectCartItems = (state) => state.cart.cartItems;
 
-export const {updateCart, addItem, removeItem, updateQuantity, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;

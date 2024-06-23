@@ -5,10 +5,11 @@ import couponsReducer from '../slice/couponsSlice';
 import flashSaleReducer from '../slice/FlashsaleSlice';
 import bestsaleReducer from '../slice/bestsaleSlice';
 import orderReducer from '../slice/orderSlice';
-import CrauselReducer from '../slice/firstcrauselsSlice';
+import carouselsReducer from '../slice/firstcrauselsSlice'; // Correct the import path if needed
 import loginReducer from '../slice/loginSlice';
 import signupReducer from '../slice/signupSlice';
 
+// Configure store with reducers
 const store = configureStore({
   reducer: {
     products: productsReducer,
@@ -17,9 +18,9 @@ const store = configureStore({
     flashSales: flashSaleReducer,
     bestsale: bestsaleReducer,
     orders: orderReducer,
-    crausels: CrauselReducer,
+    carousels: carouselsReducer, // Correct the reducer key
     login: loginReducer,
-    signup : signupReducer,
+    signup: signupReducer,
   },
 });
 

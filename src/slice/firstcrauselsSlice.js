@@ -1,22 +1,20 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+// Async thunk to fetch carousels data
 export const fetchCarousels = createAsyncThunk(
   'carousels/fetchCarousels',
   async () => {
-    try {
-      const response = await axios.get('http://127.0.0.1:8000/enhance/');
-      return response.data;
-    } catch (error) {
-      throw Error('Failed to fetch carousels');
-    }
+    const response = await axios.get('http://127.0.0.1:8000/enhance/');
+    return response.data;  // Ensure this returns an array
   }
 );
 
-const firstcrauselsSlice = createSlice({
+// Carousels slice
+const carouselsSlice = createSlice({
   name: 'carousels',
   initialState: {
-    items: [],
+    items: [],  // Ensure initial state is an array
     status: 'idle',
     error: null,
   },
@@ -27,7 +25,7 @@ const firstcrauselsSlice = createSlice({
       })
       .addCase(fetchCarousels.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.items = action.payload;
+        state.items = Array.isArray(action.payload) ? action.payload : [];  // Ensure payload is an array
       })
       .addCase(fetchCarousels.rejected, (state, action) => {
         state.status = 'failed';
@@ -36,4 +34,4 @@ const firstcrauselsSlice = createSlice({
   },
 });
 
-export default firstcrauselsSlice.reducer;
+export default carouselsSlice.reducer;

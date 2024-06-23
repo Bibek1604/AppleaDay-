@@ -22,6 +22,7 @@ import About from "./components/About";
 import Bestsellingshop from "./Shop/bestsellingshop";
 import Bestsellingshopdetails from './Shop/bestsellingshopdetails';
 import Billing from "./Shop/Billing";
+import Mobilenav from "../src/components/Mobilenav";
 export {
     Accessories,
     store,
@@ -43,6 +44,7 @@ export {
     About,
     Cover,
     Flashsaleshop,
+    Mobilenav,
     FlashSaleDetails,
     Bestsellingshop,
     Bestsellingshopdetails,

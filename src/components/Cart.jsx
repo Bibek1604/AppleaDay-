@@ -36,9 +36,10 @@ const Cart = () => {
     }
   };
 
-  const handleRemoveProduct = (id) => {
-    dispatch(removeFromCart(id));
+  const handleRemoveFromCart = (productId) => {
+    dispatch(removeFromCart(productId)); 
   };
+
 
   const calculateTotalCost = () => {
     return cartItems.reduce((total, item) => {
@@ -93,13 +94,14 @@ const Cart = () => {
                   <p className="w-96 text-xs leading-3 text-gray-600">Warranty: {product.warranty}</p>
                   <div className="flex items-center justify-between pt-5">
                   <div className="flex items-center">
-                          <p
-                    className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer"
-                          onClick={() => handleRemoveProduct(product.id)}
-                            >
-                        Remove  
-                                  </p>
-                              </div>
+                      <p
+                        className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer"
+                        onClick={() => handleRemoveFromCart(product.id)}
+                      >
+                        Remove
+                      </p>
+                    
+                    </div>
 
                     <p className="text font-black leading-none text-gray-800">
                       Rs{(parseFloat(product.final_rate) * parseInt(product.quantity)).toFixed(2)}

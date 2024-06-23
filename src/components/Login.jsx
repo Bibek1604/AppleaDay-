@@ -30,7 +30,7 @@ function Login() {
             username: '',
             password: '',
           });
-          navigate();      //to navigate after login . keep the link of page after navbarlater
+          navigate('/');      //to navigate after login . keep the link of page after navbarlater
         
         } else if (fetchLogin.rejected.match(action)) {
           console.error('Login failed:', action.payload);

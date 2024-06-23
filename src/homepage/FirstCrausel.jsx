@@ -1,58 +1,79 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+// FirstCarousel.js
+
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchCarousels } from '../slice/firstcrauselsSlice';
 
-const FirstCarousel = () => {
+function FirstCarousel() {
   const dispatch = useDispatch();
-  const items = useSelector((state) => state.crausels.items);
-  const status = useSelector((state) => state.crausels.status);
-  const error = useSelector((state) => state.crausels.error);
+  const { items, status, error } = useSelector(state => state.carousels);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(() => {   
-    if (status === 'idle') {
-      dispatch(fetchCarousels());
-    }
-  }, [status, dispatch]);
+  useEffect(() => {
+    dispatch(fetchCarousels());
+  }, [dispatch]);
+
+  useEffect(() => {
+    // Automatic slide every 5 seconds
+    const interval = setInterval(() => {
+      setCurrentIndex(prevIndex => (prevIndex + 1) % items.length);
+    }, 5000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [items.length]);
+
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+  };
 
   return (
-    <div className="p-8 bg-white">
-      {/* Banner Section */}
-      <div className="relative mb-12">
-        <img
-          src="section to insert images"
-          alt="Enhance Your Music Experience"
-          className="w-full h-64 object-cover rounded-lg"
-        />
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 rounded-lg">
-          <h3 className="text-green-400 text-lg mb-2">Subtitle Here</h3>
-          <h2 className="text-white text-3xl font-bold mb-4">Enhance Your Shopping Experience</h2>
-          <button className="bg-green-500 text-white px-6 py-2 rounded-lg">Shop Now!</button>
+    <div className="max-w-2xl mx-auto bg-black">
+      <div id="indicators-carousel" className="relative w-full" data-carousel="static">
+        <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
+          {status === 'loading' && <p>Loading...</p>}
+          {status === 'failed' && <p>Error: {error}</p>}
+          {status === 'succeeded' && items.length > 0 ? (
+            <>
+              {items.map((item, index) => (
+                <div key={item.id} className={`absolute w-full ${index === currentIndex ? 'block' : 'hidden'}`}>
+                  <img src={`http://localhost:8000${item.picture}`} className="block w-full" alt={item.title} />
+                  <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-50 text-white p-2">
+                    <h3 className="text-lg font-bold">{item.title}</h3>
+                    <p className="text-sm">{item.description}</p>
+                  </div>
+                </div>
+              ))}
+            </>
+          ) : (
+            <p>No carousel items found.</p>
+          )}
         </div>
-      </div>
-
-      {/* Products Section */}
-      <div className="mb-8">
-        <div className="h-6 w-1 bg-red-600 inline-block mr-2"></div>
-        <span className="text-lg font-bold">Here To Serve</span>
-      </div>
-
-      {/* Display Carousel Items */}
-      <h3 className="text-3xl font-bold mb-8">Explore Our Shops</h3>
-      {status === 'loading' && <p>Loading...</p>}
-      {status === 'failed' && <p>Error: {error}</p>}
-      {status === 'succeeded' && Array.isArray(items) && (
-        <div className="grid grid-cols-3 gap-4">
-          {items.map((carousel) => (
-            <div key={carousel.id} className="bg-gray-100 p-4 rounded-lg">
-              <h3 className="text-xl font-semibold mb-2">{carousel.Title}</h3>
-              <p className="text-gray-600">{carousel.Description}</p>
-              <img src={`http://localhost:8000${carousel.Picture}`} alt={carousel.Title} className="mt-4 w-full h-40 object-cover rounded-lg" />
-            </div>
+        <div className="absolute z-30 flex -translate-x-1/2 space-x-3 bottom-5 left-1/2">
+          {items.map((_, index) => (
+            <button key={index} type="button" className={`w-3 h-3 rounded-full ${index === currentIndex ? 'bg-white' : 'bg-gray-300'}`} aria-current={index === currentIndex ? "true" : "false"} aria-label={`Slide ${index + 1}`} data-carousel-slide-to={index} onClick={() => goToSlide(index)}></button>
           ))}
         </div>
-      )}
+        <button type="button" className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev onClick={() => setCurrentIndex((currentIndex - 1 + items.length) % items.length)}>
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
+            <svg className="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 1 1 5l4 4"/>
+            </svg>
+            <span className="sr-only">Previous</span>
+          </span>
+        </button>
+        <button type="button" className="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next onClick={() => setCurrentIndex((currentIndex + 1) % items.length)}>
+          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 group-hover:bg-white/50 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
+            <svg className="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4"/>
+            </svg>
+            <span className="sr-only">Next</span>
+          </span>
+        </button>
+      </div>
     </div>
   );
-};
+}
 
 export default FirstCarousel;

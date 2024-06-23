@@ -22,12 +22,14 @@ import About from "./components/About";
 import Bestsellingshop from "./Shop/bestsellingshop";
 import Bestsellingshopdetails from './Shop/bestsellingshopdetails';
 import Billing from "./Shop/Billing";
-import Mobilenav from "../src/components/Mobilenav";
+import Search from './search/Search';
+import Notification from './search/Notification';
 export {
     Accessories,
     store,
     Earbuds,
     NewAndroid,
+    Notification,
     Home,
     Electronics,
     Laptop,
@@ -38,13 +40,13 @@ export {
     Billing,
     Contact,
     Footer,
+    Search,
     Login,
     ProductDetail,
     Signup,
     About,
     Cover,
     Flashsaleshop,
-    Mobilenav,
     FlashSaleDetails,
     Bestsellingshop,
     Bestsellingshopdetails,

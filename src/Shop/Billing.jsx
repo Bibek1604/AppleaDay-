@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { placeOrder } from '../slice/orderSlice';
+import { clearCart } from '../slice/cartSlice'; 
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 
@@ -29,8 +30,8 @@ const Billing = () => {
     const products = cartItems.map((item) => ({
       id: item.id,
       title: item.title,
-      pic: item.pic, // Assuming pic is the image URL
-      photo: item.photo, // Added photo title
+      pic: item.pic, 
+      photo: item.photo,
       quantity: item.quantity,
       final_rate: item.final_rate
     }));
@@ -54,8 +55,13 @@ const Billing = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(placeOrder(formData));
-    setFormData(initialFormData); // Reset the form to initial state
+    dispatch(placeOrder(formData))
+      .then((action) => {
+        if (placeOrder.fulfilled.match(action)) {
+          dispatch(clearCart()); 
+          setFormData(initialFormData);
+        }
+      });
   };
 
   const calculateTotalCost = () => {
@@ -106,7 +112,7 @@ const Billing = () => {
                   <span className="float-right text-gray-400">{item.size}</span>
                   <p className="text-lg font-bold">Rs.{item.final_rate}</p>
                   <button
-                    onClick={() => handleItemClick(item.title, item.pic)} // Example function call with title and pic
+                    onClick={() => handleItemClick(item.title, item.pic)} 
                     className="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-1 px-4 rounded-lg shadow-sm"
                   >
                     View Details
@@ -282,12 +288,12 @@ const Billing = () => {
             <div className="mb-4">
               <input type="hidden" name="payment_method" value={formData.payment_method} />
             </div>
-        <button
-          type="submit"
-          className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md"
-        >
-          Place Order
-        </button>
+            <button
+              type="submit"
+              className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md"
+            >
+              Place Order
+            </button>
           </form>
         </div>
       </div>

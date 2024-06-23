@@ -11,7 +11,7 @@ function Footer() {
           </Link>
         <div>
           <h2 className="text-xl font-bold">AppleDay Store!</h2>
-          <p className="mt-2">Get 10% off your first order</p>
+          <p className="mt-2">Get Heavy Discount on your first order</p>
           <div className="mt-4 flex">
 
 

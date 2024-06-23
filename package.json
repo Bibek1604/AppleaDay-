@@ -16,6 +16,7 @@
     "@headlessui/react": "^2.1.0",
     "@material-tailwind/react": "^2.1.9",
     "@reduxjs/toolkit": "^2.2.5",
+    "aos": "^2.3.4",
     "axios": "^1.7.2",
     "cors": "^2.8.5",
     "framework7-react": "^8.3.3",

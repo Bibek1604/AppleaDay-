@@ -5,11 +5,11 @@ import couponsReducer from '../slice/couponsSlice';
 import flashSaleReducer from '../slice/FlashsaleSlice';
 import bestsaleReducer from '../slice/bestsaleSlice';
 import orderReducer from '../slice/orderSlice';
-import carouselsReducer from '../slice/firstcrauselsSlice'; // Correct the import path if needed
+import carouselsReducer from '../slice/firstcrauselsSlice'; 
 import loginReducer from '../slice/loginSlice';
 import signupReducer from '../slice/signupSlice';
-
-// Configure store with reducers
+import searchReducer from '../slice/searchSlice';
+import notificationReducer from '../slice/notificationSlice';
 const store = configureStore({
   reducer: {
     products: productsReducer,
@@ -18,9 +18,11 @@ const store = configureStore({
     flashSales: flashSaleReducer,
     bestsale: bestsaleReducer,
     orders: orderReducer,
-    carousels: carouselsReducer, // Correct the reducer key
+    carousels: carouselsReducer,
     login: loginReducer,
     signup: signupReducer,
+    search: searchReducer,
+    notifications: notificationReducer,
   },
 });
 

@@ -3,8 +3,8 @@ import { FaHeadset, FaRegMoneyBillAlt, FaShippingFast } from "react-icons/fa";
 
 const Service = () => {
   return (
-    <div className="flex justify-center items-center space-x-8 py-10 bg-gray-100">
-      {/* Free and Fast Delivery */}
+    
+    <div className="flex justify-center items-center space-x-8 py-10 bg-white">
       <div className="text-center">
         <div className="flex justify-center items-center mb-4">
           <div className="p-4 bg-gray-200 rounded-full">
@@ -15,7 +15,6 @@ const Service = () => {
         <p className="text-gray-600">Free delivery for all orders over $140</p>
       </div>
       
-      {/* 24/7 Customer Service */}
       <div className="text-center">
         <div className="flex justify-center items-center mb-4">
           <div className="p-4 bg-gray-200 rounded-full">

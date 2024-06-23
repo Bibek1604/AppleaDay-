@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { fetchLogin } from '../slice/loginSlice';
+import { clearCart } from '../slice/cartSlice'; // Import the clearCart action
 import Footer from '../components/Footer';
 import Top from '../components/Top';
-import Nabar from '../components/NavBar';
+import NavBar from '../components/NavBar'; // Corrected from Nabar to NavBar
 import logo from '../assets/logo.jpg';
+
 function Login() {
   const [formData, setFormData] = useState({
     username: '',
@@ -26,12 +28,12 @@ function Login() {
     dispatch(fetchLogin(formData))
       .then((action) => {
         if (fetchLogin.fulfilled.match(action)) {
+          dispatch(clearCart()); 
           setFormData({
             username: '',
             password: '',
           });
-          navigate('/');      //to navigate after login . keep the link of page after navbarlater
-        
+          navigate('/'); 
         } else if (fetchLogin.rejected.match(action)) {
           console.error('Login failed:', action.payload);
         }

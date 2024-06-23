@@ -29,7 +29,7 @@ function FirstCarousel() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-black">
+    <div className="max-w-6xl mx-auto bg-black">
       <div id="indicators-carousel" className="relative w-full" data-carousel="static">
         <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
           {status === 'loading' && <p>Loading...</p>}

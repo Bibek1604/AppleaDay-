@@ -1,6 +1,4 @@
-// NavBar.js
-
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,6 +10,9 @@ function NavBar() {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const isLoggedIn = useSelector((state) => state.login.status === 'succeeded');
   const dispatch = useDispatch();
+  
+  // State to manage mobile menu visibility
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -20,78 +21,112 @@ function NavBar() {
   };
 
   return (
-<div className="bg-white shadow-md static flex flex-col">
-  <div className="container mx-auto py-4 px-4 flex justify-between items-center">
-    {/* Logo and Navigation Links */}
-    <div className="flex items-center space-x-8">
-      {/* Logo */}
-      <Link to="/" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-        <img className="w-50 h-20 mr-2" src={logo} alt="logo" />
-        AppleDay
-      </Link>
+    <div className="bg-white shadow-md static">
+      <div className="container mx-auto py-4 px-4 md:flex md:justify-between md:items-center">
+        {/* Logo and Navigation Links */}
+        <div className="flex justify-between items-center">
+          {/* Logo */}
+          <Link to="/" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+            <img className="w-20 h-auto mr-2" src={logo} alt="logo" />
+            AppleDay
+          </Link>
 
-      {/* Navigation Links */}
-      <nav className="hidden md:flex space-x-4">
-        <Link to="/" className="text-gray-700 hover:text-rose-600">Home</Link>
-        <Link to="/contact" className="text-gray-700 hover:text-rose-600">Contact</Link>
-        <Link to="/about" className="text-gray-700 hover:text-rose-600">About</Link>
-        <Link to="/notification" className="text-gray-700 hover:text-rose-600">Notification</Link>
+          {/* Search Bar */}
+  
 
-        {isLoggedIn ? (
-          <button onClick={handleLogout} className="text-gray-700 hover:text-rose-600">Logout</button>
-        ) : (
-          <Link to="/login" className="text-gray-700 hover:text-rose-600">Login</Link>
-        )}
-      </nav>
-    </div>
-
-    {/* Search form */}
-    <form className="flex items-center max-w-sm mx-auto">
-      {/* Search Input */}
-      <label htmlFor="simple-search" className="sr-only">Search</label>
-      <div className="relative w-full">
-        {/* Search Icon */}
-        <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-          <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2"/>
-          </svg>
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="text-gray-700 hover:text-rose-600 focus:outline-none"
+            >
+              {/* Hamburger Icon */}
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+                />
+              </svg>
+            </button>
+          </div>
         </div>
-        {/* Search Input Field */}
-        <input type="text" id="simple-search" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search branch name..." required />
+
+        {/* Mobile Menu */}
+        <div className={`${mobileMenuOpen ? 'block' : 'hidden'} md:hidden mt-4`}>
+          <nav className="flex flex-col space-y-4">
+            <Link to="/" className="text-gray-700 hover:text-rose-600">Home</Link>
+            <Link to="/contact" className="text-gray-700 hover:text-rose-600">Contact</Link>
+            <Link to="/about" className="text-gray-700 hover:text-rose-600">About</Link>
+            <Link to="/notification" className="text-gray-700 hover:text-rose-600">Notification</Link>
+
+            {isLoggedIn ? (
+              <button onClick={handleLogout} className="text-gray-700 hover:text-rose-600">Logout</button>
+            ) : (
+              <Link to="/login" className="text-gray-700 hover:text-rose-600">Login</Link>
+            )}
+          </nav>
+        </div>
+
+        {/* Desktop Navigation Links */}
+        <nav className="hidden md:flex space-x-4">
+          <Link to="/" className="text-gray-700 hover:text-rose-600">Home</Link>
+          <Link to="/contact" className="text-gray-700 hover:text-rose-600">Contact</Link>
+          <Link to="/about" className="text-gray-700 hover:text-rose-600">About</Link>
+          <Link to="/notification" className="text-gray-700 hover:text-rose-600">Notification</Link>
+
+          {isLoggedIn ? (
+            <button onClick={handleLogout} className="text-gray-700 hover:text-rose-600">Logout</button>
+          ) : (
+            <Link to="/login" className="text-gray-700 hover:text-rose-600">Login</Link>
+          )}
+        </nav>
+        <div className="flex items-center justify-center space-x-2 sm:space-x-4 sm:w-full md:w-2/3 lg:w-1/2 xl:w-2/5 mx-auto">
+            <input 
+              type="text" 
+              placeholder="What are you looking for?" 
+              className="flex-grow p-2 border border-gray-300 rounded-md text-xs sm:text-sm"
+              style={{ maxWidth: '250px' }}
+            />
+            <div className="flex space-x-2">
+              <button className="p-2">
+                <i className="fas fa-search text-gray-700"></i>
+              </button>
+              <button className="p-2">
+                <i className="fas fa-heart text-gray-700"></i>
+              </button>
+              <Link to="/cart" className="flex items-center justify-center text-gray-800 hover:text-red-600">
+              <FontAwesomeIcon icon={faCartShopping} className="text-2xl mr-2" />
+              <span className="text-red-600 font-bold">{cartItems.length}</span>
+            </Link>
+            </div>
+          </div>
       </div>
-      {/* Search Button */}
-      <button type="submit" className="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-        <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-        </svg>
-        <span className="sr-only">Search</span>
-      </button>
-    </form>
+      
 
-    {/* Cart Link */}
-    <Link to="/cart" className="flex items-center justify-center text-gray-800 hover:text-red-600">
-      <FontAwesomeIcon icon={faCartShopping} className="text-2xl mr-2" />
-      <span className="text-red-600 font-bold">{cartItems.length}</span>
-    </Link>
-  </div>
+      {/* Secondary Navigation Links */}
+      <div className="container mx-auto py-2 px-4 flex overflow-x-auto whitespace-nowrap space-x-4 text-sm text-gray-700 md:block-hidden">
+        <Link to="/new-iphone" className="hover:text-rose-600">New Iphone</Link>
+        <Link to="/cover" className="hover:text-rose-600">Cover</Link>
+        <Link to="/electronics" className="hover:text-rose-600">Electronics</Link>
+        <Link to="/new-android" className="hover:text-rose-600">New Android</Link>
+        <Link to="/used-iphone" className="hover:text-rose-600">Used Iphone</Link>
+        <Link to="/used-android" className="hover:text-rose-600">Used Android</Link>
+        <Link to="/laptops" className="hover:text-rose-600">Laptop</Link>
+        <Link to="/earbuds" className="hover:text-rose-600">Earbuds</Link>
+        <Link to="/accessories" className="hover:text-rose-600">Accessories</Link>
+      </div>
 
-  {/* Secondary Navigation Links */}
-  <div className="container mx-auto py-2 px-4 flex overflow-x-auto whitespace-nowrap space-x-4 text-sm text-gray-700 md:block-hidden">
-    <Link to="/new-iphone" className="hover:text-rose-600">New Iphone</Link>
-    <Link to="/cover" className="hover:text-rose-600">Cover</Link>
-    <Link to="/electronics" className="hover:text-rose-600">Electronics</Link>
-    <Link to="/new-android" className="hover:text-rose-600">New Android</Link>
-    <Link to="/used-iphone" className="hover:text-rose-600">Used Iphone</Link>
-    <Link to="/used-android" className="hover:text-rose-600">Used Android</Link>
-    <Link to="/laptops" className="hover:text-rose-600">Laptop</Link>
-    <Link to="/earbuds" className="hover:text-rose-600">Earbuds</Link>
-    <Link to="/accessories" className="hover:text-rose-600">Accessories</Link>
-  </div>
-
-  {/* Flexible Space */}
-  <div className="flex-grow"></div>
-</div>
-
+      {/* Flexible Space */}
+      <div className="flex-grow"></div>
+    </div>
   );
 }
 

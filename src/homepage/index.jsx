@@ -10,6 +10,7 @@ import Service from '../homepage/Service';
 import FlashProduct from './FlashProduct';
 import Flashsaleshop from '../Shop/Flashsaleshop';
 import About from '../components/About';
+import Recommendation from '../recommendation/Recommendation';
 function Home() {
     return (
         <>  
@@ -19,7 +20,10 @@ function Home() {
             <FlashProduct />
             <Category />
             <BestSelling />
+            <Recommendation />
+
             <OurProducts />
+
             <NewArrival />
             <Service />
             <Footer />

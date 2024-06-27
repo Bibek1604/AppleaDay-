@@ -22,8 +22,10 @@ import About from "./components/About";
 import Bestsellingshop from "./Shop/bestsellingshop";
 import Bestsellingshopdetails from './Shop/bestsellingshopdetails';
 import Billing from "./Shop/Billing";
-// import Search from './search/Search';
+import Search from './search/Search';
 import Notification from './search/Notification';
+import Recommendation from "./recommendation/Recommendation";
+import Recommendationdetails from "./recommendation/Recommendationdetails";
 export {
     Accessories,
     store,
@@ -40,7 +42,8 @@ export {
     Billing,
     Contact,
     Footer,
-    // Search,
+    Recommendationdetails,
+    Search,
     Login,
     ProductDetail,
     Signup,
@@ -50,7 +53,9 @@ export {
     FlashSaleDetails,
     Bestsellingshop,
     Bestsellingshopdetails,
+    Recommendation,
     Route,
     Router,
-    Routes
+    Routes,
+
 }

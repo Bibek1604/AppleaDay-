@@ -10,8 +10,12 @@
     import loginReducer from '../slice/loginSlice';
     import signupReducer from '../slice/signupSlice';
     import notificationReducer from '../slice/notificationSlice';
+    import recommendationReducer from '../slice/recommendationSlice';
+    import combinedReducer from '../slice/combinedSlice';
     const store = configureStore({
       reducer: {
+        combined: combinedReducer,
+
         products: productsReducer,
         cart: cartReducer,
         coupons: couponsReducer,
@@ -22,6 +26,8 @@
         login: loginReducer,
         signup: signupReducer,
         notifications: notificationReducer,
+        recommendations: recommendationReducer,
+        
       },
     });
 

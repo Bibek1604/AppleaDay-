@@ -26,6 +26,7 @@ import Search from './search/Search';
 import Notification from './search/Notification';
 import Recommendation from "./recommendation/Recommendation";
 import Recommendationdetails from "./recommendation/Recommendationdetails";
+import Navbars from "./components/Navbars";
 export {
     Accessories,
     store,
@@ -38,6 +39,7 @@ export {
     NewIphone,
     UsedAndroid,
     UsedIphone,
+    Navbars,
     Cart,
     Billing,
     Contact,

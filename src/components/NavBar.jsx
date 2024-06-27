@@ -5,15 +5,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { logout } from '../slice/loginSlice';
 import logo from '../assets/logo.jpg';
-
+import { useNavigate } from 'react-router-dom';
 function NavBar() {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const isLoggedIn = useSelector((state) => state.login.status === 'succeeded');
   const dispatch = useDispatch();
-  
+  const [query, setQuery] = useState('');
+  const navigate = useNavigate();
   // State to manage mobile menu visibility
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [query, setQuery] = useState('');
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (query.trim()) {
+      navigate(`/search?q=${encodeURIComponent(query.trim())}`);
+    }
+  };
+
 
 
 
@@ -92,21 +99,22 @@ function NavBar() {
           )}
         </nav>
         <div className="flex items-center justify-center space-x-2 sm:space-x-4 sm:w-full md:w-2/3 lg:w-1/2 xl:w-2/5 mx-auto">
-        <form className="flex items-center space-x-2">
-  <input 
-    type="text" 
-    placeholder="What are you looking for?" 
-    className="flex-grow p-2 border border-gray-300 rounded-md text-xs sm:text-sm"
-    style={{ maxWidth: '250px' }}
-  />
-  <button 
-    type="button" 
-    className="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300"
-
-  >
-    Search
-  </button>
-</form>
+        <form onSubmit={handleSearch} className="flex items-center space-x-2">
+            <input
+              type="text"
+              placeholder="What are you looking for?"
+              className="flex-grow p-2 border border-gray-300 rounded-md text-xs sm:text-sm"
+              style={{ maxWidth: '250px' }}
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+            <button
+              type="submit"
+              className="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300"
+            >
+              Search
+            </button>
+          </form>
 
           <div className="flex space-x-2">
             <button className="p-2">

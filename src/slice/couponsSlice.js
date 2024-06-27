@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 export const validateCoupon = createAsyncThunk(
   'coupons/validateCoupon',
@@ -14,14 +14,20 @@ export const validateCoupon = createAsyncThunk(
   }
 );
 
-const couponsSlice = createSlice({
+export const resetCoupon = createSlice({
   name: 'coupons',
   initialState: {
     discount: 0,
     status: 'idle',
     error: null,
   },
-  reducers: {},
+  reducers: {
+    reset(state) {
+      state.discount = 0;
+      state.status = 'idle';
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(validateCoupon.pending, (state) => {
@@ -41,4 +47,5 @@ const couponsSlice = createSlice({
   },
 });
 
-export default couponsSlice.reducer;
+export const { reset } = resetCoupon.actions;
+export default resetCoupon.reducer;

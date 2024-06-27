@@ -13,6 +13,9 @@ function NavBar() {
   
   // State to manage mobile menu visibility
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [query, setQuery] = useState('');
+
+
 
   const handleLogout = () => {
     dispatch(logout());
@@ -32,7 +35,7 @@ function NavBar() {
           </Link>
 
           {/* Search Bar */}
-  
+ 
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
@@ -89,27 +92,33 @@ function NavBar() {
           )}
         </nav>
         <div className="flex items-center justify-center space-x-2 sm:space-x-4 sm:w-full md:w-2/3 lg:w-1/2 xl:w-2/5 mx-auto">
-            <input 
-              type="text" 
-              placeholder="What are you looking for?" 
-              className="flex-grow p-2 border border-gray-300 rounded-md text-xs sm:text-sm"
-              style={{ maxWidth: '250px' }}
-            />
-            <div className="flex space-x-2">
-              <button className="p-2">
-                <i className="fas fa-search text-gray-700"></i>
-              </button>
-              <button className="p-2">
-                <i className="fas fa-heart text-gray-700"></i>
-              </button>
-              <Link to="/cart" className="flex items-center justify-center text-gray-800 hover:text-red-600">
+        <form className="flex items-center space-x-2">
+  <input 
+    type="text" 
+    placeholder="What are you looking for?" 
+    className="flex-grow p-2 border border-gray-300 rounded-md text-xs sm:text-sm"
+    style={{ maxWidth: '250px' }}
+  />
+  <button 
+    type="button" 
+    className="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300"
+
+  >
+    Search
+  </button>
+</form>
+
+          <div className="flex space-x-2">
+            <button className="p-2">
+              <i className="fas fa-heart text-gray-700"></i>
+            </button>
+            <Link to="/cart" className="flex items-center justify-center text-gray-800 hover:text-red-600">
               <FontAwesomeIcon icon={faCartShopping} className="text-2xl mr-2" />
               <span className="text-red-600 font-bold">{cartItems.length}</span>
             </Link>
-            </div>
           </div>
+        </div>
       </div>
-      
 
       {/* Secondary Navigation Links */}
       <div className="container mx-auto py-2 px-4 flex overflow-x-auto whitespace-nowrap space-x-4 text-sm text-gray-700 md:block-hidden">

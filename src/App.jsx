@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Accessories, Earbuds, Electronics, Laptop,Notification ,NewIphone, UsedAndroid,Billing,UsedIphone,Search , About, Cart, Contact, Footer, Login, ProductDetail, Signup, Cover, Home, NewAndroid, Flashsaleshop,FlashSaleDetails , Bestsellingshop,Bestsellingshopdetails} from './index'; // Correct case 
+import { Accessories, Earbuds, Electronics, Laptop,Notification ,NewIphone, UsedAndroid,Billing,UsedIphone , About, Cart, Contact, Footer, Login, ProductDetail, Signup, Cover, Home, NewAndroid, Flashsaleshop,FlashSaleDetails , Bestsellingshop,Bestsellingshopdetails} from './index'; // Correct case 
 import { Provider } from 'react-redux';
 
 import store from './store/Store';
@@ -14,7 +14,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/search" element={<Search />} />
+          {/* <Route path="/search" element={<Search />} /> */}
           <Route path="/notification" element={<Notification />} />
           <Route path="/footer" element={<Footer />} />
           <Route path="/about" element={<About />} />

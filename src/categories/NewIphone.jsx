@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import NavBar from '../components/NavBar';
 import { fetchProducts } from '../slice/productsSlice';
+import BestSelling from '../homepage/BestSelling';
 
 const NewIphone = () => {
   const dispatch = useDispatch();
@@ -90,6 +91,7 @@ const NewIphone = () => {
           ))}
         </div>
       </main>
+      <BestSelling />
       <Footer />
     </div>
   );

@@ -5,6 +5,8 @@ import NavBar from '../components/NavBar';
 import { fetchProducts } from '../slice/productsSlice';
 import  { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import FlashSales from '../homepage/FlashSales';
+import FlashProduct from '../homepage/FlashProduct';
 
 
 const NewAndroid = () => {
@@ -139,6 +141,8 @@ const NewAndroid = () => {
         ))}
       </div>
     </main>
+    <FlashSales />
+    <FlashProduct />
     <Footer />
   </div>
   );

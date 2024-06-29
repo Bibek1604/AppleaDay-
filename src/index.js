@@ -27,6 +27,7 @@ import Notification from './search/Notification';
 import Recommendation from "./recommendation/Recommendation";
 import Recommendationdetails from "./recommendation/Recommendationdetails";
 import Navbars from "./components/Navbars";
+import Recommendationshop from './recommendation/Recommendationshop'
 export {
     Accessories,
     store,
@@ -42,6 +43,7 @@ export {
     Navbars,
     Cart,
     Billing,
+    Recommendationshop,
     Contact,
     Footer,
     Recommendationdetails,

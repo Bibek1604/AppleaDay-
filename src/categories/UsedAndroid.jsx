@@ -4,6 +4,7 @@ import NavBar from '../components/NavBar';
 import { fetchProducts } from '../slice/productsSlice';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import BestSelling from '../homepage/BestSelling';
 
 
 const UsedAndroid = () => {
@@ -139,6 +140,7 @@ const UsedAndroid = () => {
         ))}
       </div>
     </main>
+    <BestSelling />
     <Footer />
   </div>
   );

@@ -4,7 +4,8 @@ import NavBar from '../components/NavBar';
 import { fetchProducts } from '../slice/productsSlice';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
+import FlashSales from '../homepage/FlashSales';
+import FlashProduct from '../homepage/FlashProduct';
 
 const Earbuds = () => {
   const dispatch = useDispatch();
@@ -139,6 +140,9 @@ const Earbuds = () => {
         ))}
       </div>
     </main>
+    <FlashSales />
+    <FlashProduct />
+
     <Footer />
   </div>
   );

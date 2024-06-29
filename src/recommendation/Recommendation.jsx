@@ -59,7 +59,7 @@ const Recommendation = () => {
         ))}
       </div>
       <div className="mt-8 text-center">
-        <Link to="/all-bestselling-products">
+        <Link to="/recommendationshop">
           <button className="bg-red-600 text-white py-2 px-6 rounded-lg">View All</button>
         </Link>
       </div>

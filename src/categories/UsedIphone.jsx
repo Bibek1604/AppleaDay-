@@ -4,6 +4,7 @@ import NavBar from '../components/NavBar';
 import { fetchProducts } from '../slice/productsSlice';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import Recommendation from '../recommendation/Recommendation';
 
 
 const UsedIphone = () => {
@@ -139,6 +140,7 @@ const UsedIphone = () => {
         ))}
       </div>
     </main>
+    <Recommendation />
     <Footer />
   </div>
   );

@@ -24,8 +24,9 @@ function Footer() {
 New Baneshwor, Kathmandu
 
 </p>
-          <p className="mt-2 ">shopwithappleday@gmail.com</p>
-          <p className="mt-2">+9804682770,9851350535</p>
+          <p className="mt-4 ">shopwith
+            appleday@gmail.com</p>
+          <p className="mt-6">+9804682770,9851350535</p>
         </div>
 
         <div>
@@ -61,7 +62,11 @@ New Baneshwor, Kathmandu
         </div>
       </div>
       <div className="container mx-auto px-4 mt-10 border-t border-gray-700 pt-4">
-        <p className="text-center text-gray-500">&copy; Copyright AppleDay 2024. All right reserved || Developed By Bibek Pandey</p>
+        <p className="text-center text-gray-500">&copy; Copyright AppleDay 2024. All right reserved || Developed By   
+
+          <a href="https://www.linkedin.com/in/bibek-pandey-43313723b/" className="hover:text-rose-600"> Bibek Pandey</a> 
+        </p>
+        
       </div>
 
     </footer>

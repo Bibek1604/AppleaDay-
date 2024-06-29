@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Accessories, Earbuds, Electronics, Laptop,Notification ,NewIphone,    Navbars,
-  UsedAndroid,Billing,UsedIphone , About, Cart, Contact, Footer, Login, ProductDetail, Search ,Signup, Recommendation,Cover, Home, NewAndroid, Flashsaleshop,FlashSaleDetails ,Recommendationdetails, Bestsellingshop,Bestsellingshopdetails} from './index'; // Correct case 
+  UsedAndroid,Billing,UsedIphone , About, Cart, Contact, Footer, Login, ProductDetail, Search ,Signup,
+   Recommendation,Cover, Home, NewAndroid, Flashsaleshop,FlashSaleDetails ,Recommendationdetails, Recommendationshop,  Bestsellingshop,Bestsellingshopdetails} from './index'; // Correct case 
 import { Provider } from 'react-redux';
 
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/navbars" element={<Navbars />} />
           <Route path="/search" element={<Search />} />
+          <Route path='/recommendationshop' element={<Recommendationshop />} />
           <Route path="/notification" element={<Notification />} />
           <Route path="/footer" element={<Footer />} />
           <Route path="/about" element={<About />} />

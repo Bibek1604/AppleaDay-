@@ -6,6 +6,8 @@ import TopBar from '../components/TopBar';
 import { fetchProducts } from '../slice/productsSlice';
 import  { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import FlashSales from '../homepage/FlashSales';
+import FlashProduct from '../homepage/FlashProduct';
 
 const Electronics = () => {
   const dispatch = useDispatch();
@@ -142,6 +144,8 @@ const Electronics = () => {
         ))}
       </div>
     </main>
+        <FlashSales/>
+        <FlashProduct/>
     <Footer />
   </div>
   );
